@@ -1,0 +1,17 @@
+{
+  "name": "@chengjs/cjs",
+  "main": "./bin/main.js",
+  "description": "chengjs cli lib",
+  "bin": {
+    "cjs": "./bin/main.js"
+  },
+  "author": "Chengzi <ttghost@126.com>",
+  "devDependencies": {
+    "chalk": "^3.0.0",
+    "commander": "^4.0.1",
+    "download-git-repo": "^3.0.2",
+    "html-webpack-plugin": "^5.3.1",
+    "ora": "^4.0.3",
+    "shelljs": "^0.8.3"
+  }
+}

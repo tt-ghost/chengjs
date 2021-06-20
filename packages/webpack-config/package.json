@@ -1,0 +1,11 @@
+{
+  "name": "@chengjs/webpack-config",
+  "description": "webpack config",
+  "version": "0.1.0",
+  "main": "./src/main.js",
+  "scripts": {},
+  "devDependencies": {
+    "html-webpack-plugin": "^5.3.1",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
