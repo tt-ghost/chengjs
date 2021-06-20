@@ -1,14 +1,15 @@
 import { OriginLocation, Location, Route } from './router.d'
 
-export function join (base: string, url: string) {
-  base = base.trim().replace(/^\.|\//g, '')
-  url = url.trim().replace(/^\.|\//g, '')
-  return base + '/' + url
+export function join (base: string, path: string) {
+  const clean = s => s.trim().replace(/^\./g, '').replace(/^\//g, '').replace(/\/$/g, '')
+  base = clean(base)
+  path = clean(path)
+  return base + '/' + path
 }
 
 export function resolve(loca: OriginLocation = location): Location {
   const { hash, host, pathname, port, protocol, search } = loca
-  let query = resolveSearch(search)
+  const query = resolveSearch(search)
 
   return {
     hash,
@@ -21,12 +22,12 @@ export function resolve(loca: OriginLocation = location): Location {
   }
 }
 
-export function resolveLocation (): Location {
-  return resolve(location)
+export function resolveLocation (local: OriginLocation = location): Location {
+  return resolve(local)
 }
 
-export function match(routes: Route[], base: string = ''): Route {
-  const loca: Location = resolveLocation()
+export function match(routes: Route[], base: string = '', local?: OriginLocation): Route {
+  const loca: Location = resolveLocation(local)
 
   return routes.find(route => (base + route.path) === loca.path)
 }

@@ -22,12 +22,12 @@ conf.prod = () => {
   base = useOptimization(base)
 
   return merge(base, {
-    entry: './src/main.ts',
+    entry: './src/index.ts',
     output: {
-      filename: 'copy.min.js',
+      filename: 'router.min.js',
       path: path.resolve(__dirname, '../dist'),
       library: {
-        name: 'cjsCopy',
+        name: 'cjsRouter',
         type: 'umd',
         export: 'default'
       }
@@ -35,39 +35,13 @@ conf.prod = () => {
   })
 }
 
-// test env config
-conf.test = () => {
-  base.mode = 'production'
-  base = useLess(base)
-  base = useOptimization(base)
-
-  return merge(base, {
-    entry: './examples/copy-test.ts',
-    output: {
-      filename: '[name].js',
-      path: path.resolve(__dirname, './dist')
-    },
-    plugins: [
-      new HtmlPlugin({
-        template: './examples/index.html',
-        filename: 'index.html'
-      })
-    ],
-    devServer: {
-      host: '0.0.0.0',
-      port: 9000
-    }
-  })
-}
-
-
 // development env config
 conf.dev = () => {
   base.mode = 'development'
   base.devtool = 'source-map'
   base = useLess(base)
   return merge(base, {
-    entry: './examples/copy-test.ts',
+    entry: './examples/index.ts',
     output: {
       filename: '[name].js',
       path: __dirname
@@ -80,7 +54,7 @@ conf.dev = () => {
     ],
     devServer: {
       host: '0.0.0.0',
-      port: 9000
+      port: 9001
     }
   })
 }

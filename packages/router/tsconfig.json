@@ -19,6 +19,7 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "outDir": "./lib",
+    "downlevelIteration": true,
     "types": ["@types/jest", "@types/node"]
   }
 }

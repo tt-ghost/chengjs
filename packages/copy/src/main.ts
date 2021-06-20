@@ -10,8 +10,7 @@ export default function copy <T>(str: string) {
   const isCopied: boolean = document.execCommand('copy', false, null)
 
   return new Promise<any>((resolve, reject) => {
-    isCopied ? resolve(str) : reject(new Error('error'))
+    isCopied ? resolve(str) : reject(new Error('copy failed!'))
     document.body.removeChild(input)
   })
 }
-

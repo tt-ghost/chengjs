@@ -12,3 +12,5 @@ dist
 */**/*.map
 .DS_Store
 */**/.DS_Store
+coverage
+*/**/coverage

@@ -5,12 +5,19 @@
   "author": "Chengzi <ttghost@126.com>",
   "scripts": {
     "start": "npm run dev",
-    "dev": "webpack serve --conf ./build/webpack.dev.js --progress",
-    "build": "webpack serve --conf ./build/webpack.build.js --progress"
+    "dev": "webpack serve --env dev --progress --config webpack.config.js",
+    "prod": "webpack --env prod --progress --config webpack.config.js",
+    "test": "jest"
   },
   "devDependencies": {
+    "@chengjs/webpack-config": "^0.1.0",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.4",
     "html-webpack-plugin": "^5.3.1",
+    "jest": "^27.0.4",
+    "ts-jest": "^27.0.3",
     "ts-loader": "^9.2.3",
+    "ts-node": "^10.0.0",
     "typescript": "^4.3.2",
     "webpack": "^5.38.1",
     "webpack-cli": "^4.7.2",

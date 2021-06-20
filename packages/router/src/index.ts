@@ -10,7 +10,7 @@ export default class Router{
 
   constructor(config: RouteConf) {
     this.mode = config.mode || 'history'
-    this.routes = config.routes
+    this.routes = config.routes ||[]
     this.base = config.base || '/'
     this.route = resolveLocation()
     window.addEventListener('popstate', this.listener.bind(this))
@@ -44,15 +44,13 @@ export default class Router{
     // cb(to, from, next)
   }
 
-  listener (e: { state: { url: string, onComplete?: () => void } }): void {
+  listener (e: { state: { url: string, onComplete?: (route: Route) => void } }): void {
     const { url, onComplete } = e.state
     const { base } = this
-    console.log(base, url)
-    const matched: boolean = match(this.routes, base)
-    console.log('popstate: ', e)
+    const matched: Route = match(this.routes, base)
 
+    onComplete(matched)
     if (typeof onComplete === 'function') {
-      onComplete(matched)
     }
   }
   
