@@ -1,11 +1,11 @@
 import Router from '../../src/index'
 import home from '../component/home/index'
 import user from '../component/user/index'
-import setting from '../component/setting/index'
 
 const config = {
   base: '/examples',
   mode: 'history',
+  component: 'examples home',
   routes: [{
     path: '/home',
     name: 'home',

@@ -6,9 +6,10 @@ const {
   resolveEnv,
   useLess,
   useTs,
-  useOptimization
+  useOptimization,
+  useBanner
 } = require('@chengjs/webpack-config')
-
+const pkg = require('./package.json')
 const conf = {}
 
 // base env config
@@ -20,12 +21,20 @@ conf.prod = () => {
   base.mode = 'production'
   base = useLess(base)
   base = useOptimization(base)
+  base = useBanner(base, {
+    // raw: true,
+    entryOnly: true,
+    banner: `${pkg.name}
+version: ${pkg.version}
+author: ${pkg.author}
+description: ${pkg.description}`
+  })
 
   return merge(base, {
     entry: './src/main.ts',
     output: {
       filename: 'copy.min.js',
-      path: path.resolve(__dirname, '../dist'),
+      path: path.resolve(__dirname, './dist'),
       library: {
         name: 'cjsCopy',
         type: 'umd',
@@ -34,32 +43,6 @@ conf.prod = () => {
     }
   })
 }
-
-// test env config
-conf.test = () => {
-  base.mode = 'production'
-  base = useLess(base)
-  base = useOptimization(base)
-
-  return merge(base, {
-    entry: './examples/copy-test.ts',
-    output: {
-      filename: '[name].js',
-      path: path.resolve(__dirname, './dist')
-    },
-    plugins: [
-      new HtmlPlugin({
-        template: './examples/index.html',
-        filename: 'index.html'
-      })
-    ],
-    devServer: {
-      host: '0.0.0.0',
-      port: 9000
-    }
-  })
-}
-
 
 // development env config
 conf.dev = () => {

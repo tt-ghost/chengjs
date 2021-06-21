@@ -16,7 +16,7 @@ export default class Router{
     window.addEventListener('popstate', this.listener.bind(this))
   }
 
-  push(url: string, onComplete: () => void): void {
+  push(url: string, onComplete: (e: any) => void): void {
     const state: State = {
       key: Date.now(),
       url

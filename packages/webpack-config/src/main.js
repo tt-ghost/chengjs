@@ -4,7 +4,8 @@ const {
   resolveEnv,
   useLess,
   useTs,
-  useOptimization
+  useOptimization,
+  useBanner
 } = require('./helper.js')
 
 module.exports = {
@@ -13,5 +14,6 @@ module.exports = {
   resolveEnv,
   useLess,
   useTs,
-  useOptimization
+  useOptimization,
+  useBanner
 }

@@ -1,6 +1,10 @@
 import router from './router/index'
+import { Route } from '../src/router.d'
 
-const root: Element = document.getElementById('root')
+function get (id: string): HTMLElement {
+  return document.getElementById(id)
+}
+const root = get('root')
 
 function loadPage(component: any, props?: object) {
   console.log(1212, component, props)
@@ -15,17 +19,17 @@ function loadPage(component: any, props?: object) {
   }
 }
 
-function get (id: string) {
-  return document.getElementById(id)
-}
-const push: Element = get('push')
-const go: Element = get('go')
-const log: Element = get('log')
-push.addEventListener('click', (e: { target: Element }): void => {
-  router.push(e.target.innerText.split(':')[1], onComplete)
+
+const push = get('push')
+// const go = get('go') as HTMLElement
+// const log = get('log') as HTMLElement
+push.addEventListener('click', (e): void => {
+  const target = e.target  as HTMLElement
+  router.push(target.innerText.split(':')[1], onComplete)
 })
 
-function onComplete(route) {
+function onComplete(route: Route): void {
+  if (!route) return
   loadPage(route.component)
 }
 // console.log(router.route)

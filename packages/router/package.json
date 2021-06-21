@@ -1,6 +1,7 @@
 {
   "name": "@chengjs/router",
   "main": "./dist/router.min.js",
+  "version": "0.1.0",
   "description": "router lib",
   "author": "Chengzi <ttghost@126.com>",
   "scripts": {

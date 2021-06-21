@@ -1,4 +1,4 @@
-import copy from '../src/main'
+import copy from '../'
 
 (function() {
   const btn: HTMLElement = document.getElementById('copy')

@@ -1,22 +1,26 @@
 {
   "includes": [
-    "./packages/router/src/**/*.ts"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules",
-    "**/*.spec.ts"
+    "./types",
+    "./examples",
+    "test/**/*.ts"
   ],
   "compilerOptions": {
     "target": "es5",
     "module": "esnext",
     "declaration": true,
-    "declarationMap": true,
+    "declarationMap": false,
     "declarationDir": "./types",
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "sourceMap": true,
-    "outDir": "./dist/"
+    "sourceMap": false,
+    "outDir": "./lib",
+    "downlevelIteration": true,
+    "types": ["@types/jest", "@types/node"]
   }
 }

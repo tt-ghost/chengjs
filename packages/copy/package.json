@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "main": "./src/main.ts",
   "author": "Chengzi <ttghost@126.com>",
+  "description": "copy util",
   "scripts": {
     "start": "npm run dev",
     "dev": "webpack serve --env dev --progress --config webpack.config.js",
-    "prod": "webpack --env prod --progress",
+    "prod": "webpack --env prod --progress --config webpack.config.js",
     "test": "jest"
   },
   "devDependencies": {
@@ -30,5 +31,6 @@
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^5.8.0"
-  }
+  },
+  "types": "types/src/main.d.ts"
 }

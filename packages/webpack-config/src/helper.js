@@ -1,3 +1,5 @@
+
+
 /**
  * 获取局域网ip地址 
  */
@@ -124,11 +126,21 @@ function lessPlugin(options = {}, base) {
 
   return isProd ? (() => {
     const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-    return new MiniCssExtractPlugin({
+    const opt = Object.assign({
       filename: '[name].css',
-      chunkFilename: '[id].css',
-    })
+      // chunkFilename: '[id].css',
+    }, options)
+    return new MiniCssExtractPlugin(opt)
   })() : null
+}
+
+/**
+ * 添加banner plugin
+ */
+ function bannerPlugin(options = {}, base) {
+  const webpack = require('webpack');
+
+  return new webpack.BannerPlugin(options)
 }
 
 /**
@@ -231,13 +243,23 @@ function useTs(base = getBase(), options = {}) {
   return merge(base, loader(tsLoader(options)))
 }
 
+/**
+ * 添加banner
+ */
+ function useBanner(base = getBase(), options = {}) {
+  const { merge } = require('webpack-merge')
+
+  return merge(base, plugin(bannerPlugin(options, base)))
+}
+
 module.exports = {
   getBase,
   getIP,
   resolveEnv,
   useLess,
   useTs,
-  useOptimization
+  useOptimization,
+  useBanner
 }
 
 
