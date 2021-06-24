@@ -1,0 +1,8 @@
+{
+  "name": "@chengjs/interview",
+  "main": "./README.md",
+  "version": "0.1.0",
+  "description": "interview lib",
+  "author": "Chengzi <ttghost@126.com>",
+  "scripts": {}
+}

@@ -1,0 +1,16 @@
+{
+  "extends": "plugin:react/recommended",
+  "rules": {
+    "@typescript-eslint/no-var-requires": 0,
+    "react/react-in-jsx-scope": "off",
+    "react/display-name": 0,
+    "react/prop-types": 0
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "project": "./tsconfig.json",
+    "allowImportExportEverywhere": true
+  }
+}

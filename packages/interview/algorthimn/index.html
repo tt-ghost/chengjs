@@ -1,0 +1,61 @@
+<html>
+<body>
+<div id='container'></div>
+
+<script>
+const container = document.getElementById('container')
+
+function create (id, name, message) {
+  const el = document.createElement('div')
+  el.setAttribute('id', id)
+  el.setAttribute('style', 'padding: 10px;border-bottom: 1px solid #ddd;')
+
+  const title = document.createElement('h5')
+  title.innerHTML = `<a href='./${name.split(":")[0]}' target='_blank'>${name}</a>`
+
+  const result = document.createElement('pre')
+  result.setAttribute('style', 'color:red;white-space: break-spaces;')
+  result.innerHTML = message
+
+  el.appendChild(title)
+  el.appendChild(result)
+
+  container.appendChild(el)
+}
+
+function resolve(path) {
+  const st = path.split('/')
+  const name = decodeURIComponent(st[st.length - 1])
+  const id = name.match(/([\d-]+)\./)[1]
+
+  return { id, name }
+}
+
+window.addEventListener('error', e => {
+  if (!e.error) return
+  const { actual, expected, message, operator, showDiff, stack } = e.error || {}
+
+  console.log(resolve(stack), stack)
+  const { id, name } = resolve(stack)
+  setTimeout(() => {
+    document.getElementById(id).querySelector('pre').innerHTML = JSON.stringify(e.error, null, 2)
+  }, 10)
+  
+})
+
+</script>
+<script crossorigin="anonymous" src='https://cdn.bootcdn.net/ajax/libs/chai/4.3.4/chai.min.js'></script>
+<script type='text/javascript' src='./m38.字符串的排列.js'></script>
+<script type='text/javascript' src='./m17-23.最大黑方阵.js'></script>
+<script>
+const scirpts = [].slice.call(document.getElementsByTagName('script'))
+  .filter(s => (!!s.src && s.src.indexOf('https://cdn.bootcdn.net') === -1))
+  .forEach(s => {
+    const { id, name } = resolve(s.src)
+    create(id, name, '<div><b style="color: #333;">结果：</b><span style="color: green;">通过</span></div>')
+  })
+  console.log(scirpts)
+
+</script>
+</body>
+</html>
