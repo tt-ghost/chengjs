@@ -3,6 +3,7 @@ import { Button } from '@alifd/next'
 import { connect } from 'react-redux'
 
 function UserHome (props) {
+  console.log(arguments)
   function showName() {
     props.showNameAsync({ name: 'chengzi' })
   }

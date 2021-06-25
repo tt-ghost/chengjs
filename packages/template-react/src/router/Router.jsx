@@ -93,7 +93,7 @@ export default function (props = {}) {
 
       return <Route
         key={path}
-        exact
+        exact={exact}
         path={path}
         component={loadComponent(component)}
         {...props}
