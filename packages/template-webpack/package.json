@@ -1,5 +1,5 @@
 {
-  "name": "@chengjs/webpack-config",
+  "name": "@chengjs/template-webpack",
   "description": "webpack config",
   "version": "0.1.0",
   "main": "./src/main.js",
