@@ -19,7 +19,15 @@ module.exports = env =>  {
       host: '0.0.0.0',
       port: 9000,
       historyApiFallback: true,
-      hot: true
+      hot: true,
+      proxy: {
+        "/api/": {
+          target: 'http://localhost:7001',
+          pathRewrite: {
+            "/api/": "",
+          }
+        }
+      }
     },
     watch: true
   })

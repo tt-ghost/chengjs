@@ -13,6 +13,12 @@ export default (appInfo: EggAppInfo) => {
   // redis
   config.redis = {};
 
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  }
+
   // // valparams插件参数
   // config.valparams = {
   //   locale    : 'zh-cn',

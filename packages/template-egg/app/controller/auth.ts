@@ -24,12 +24,20 @@ export default class AuthController extends Controller{
     const rules = {
       name: { required: true, type: 'string' },
       password: { required: true, type: 'string' },
-      rememberMe: { required: true, type: 'boolean' }
+      rememberMe: { required: false, type: 'boolean' }
     }
-    const result = ctx.validate(rules, ctx.request.body)
-    console.log(result)
+    const result: any = ctx.validate(rules, ctx.request.body)
+    if (result) {
+      // ctx.status = 400
+      ctx.body = result
+    } else {
+      ctx.body = {
+        message: 'login'
+      }
+    }
+
     ctx.body = {
-      message: 'login'
+      message: result
     }
   }
 

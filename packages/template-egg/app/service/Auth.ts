@@ -45,4 +45,33 @@ export default class Auth extends Service {
 
   //   return this.ctx.jwt.verify(token, this.config.jwt.secret);
   // }
+  /**
+   * 注册用户
+   * @param name string
+   * @returns user infomation
+   */
+   public async register (name: string, password: string) {
+    return {
+      name,
+      password
+    }
+  }
+
+  /**
+   * 登录
+   * @param name string 用户名
+   * @param pwd string 用户密码
+   * @param rememberMe boolean 时候记录登录状态
+   * @returns user infomation
+   */
+  public async login(name: string, password: string, rememberMe: boolean) {
+    return {
+      status: 1,
+      body: {
+        name,
+        password, 
+        rememberMe
+      }
+    }
+  }
 }
