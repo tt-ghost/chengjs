@@ -10,7 +10,6 @@
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
-    "project": "./tsconfig.json",
     "allowImportExportEverywhere": true
   }
 }
