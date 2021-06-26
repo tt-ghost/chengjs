@@ -61,6 +61,12 @@ export default (appInfo: EggAppInfo) => {
   //   pageUrl: '/public/404.html'
   // }
 
+  // github passport
+  config.passportGithub = {
+    key: '',
+    secret: ''
+  };
+
   // add your special config in here
   const bizConfig = {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,

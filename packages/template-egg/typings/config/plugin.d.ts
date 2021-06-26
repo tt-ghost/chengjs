@@ -19,6 +19,8 @@ import 'egg-session-redis';
 import 'egg-mysql';
 import 'egg-sequelize';
 import 'egg-validate';
+import 'egg-passport';
+import 'egg-passport-github';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -39,5 +41,7 @@ declare module 'egg' {
     mysql?: EggPluginItem;
     sequelize?: EggPluginItem;
     validate?: EggPluginItem;
+    passport?: EggPluginItem;
+    passportGithub?: EggPluginItem;
   }
 }

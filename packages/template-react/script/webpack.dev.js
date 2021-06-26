@@ -29,7 +29,6 @@ module.exports = env =>  {
         }
       }
     },
-    watch: true
   })
 
   useLocalLog(config)

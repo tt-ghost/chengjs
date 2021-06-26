@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import './style.scss'
 import { post } from '../../../helper'
 
-function AuthLogin (props) {
+function PassportLogin (props) {
 
   const ref = createRef()
 
@@ -19,29 +19,29 @@ function AuthLogin (props) {
   function onSubmit(e) {
     e.preventDefault()
     const values = getValues()
-    post('/api/auth/login', values)
+    post('/api/passport/login', values)
   }
 
 
-  return <div className='auth-login'>
+  return <div className='passport-login'>
     <form ref={ref}>
 
-      <div className='auth-login-item'>
+      <div className='passport-login-item'>
         <label>username:</label>
         <input name='name' />
       </div>
 
-      <div className='auth-login-item'>
+      <div className='passport-login-item'>
         <label>password:</label>
         <input name='password' />
       </div>
 
-      <div className='auth-login-item'>
+      <div className='passport-login-item'>
         <label>repassword:</label>
         <input name='repassword' />
       </div>
 
-      <div className='auth-login-item auth-login-submit'>
+      <div className='passport-login-item passport-login-submit'>
         <button onClick={onSubmit}>submit</button>
       </div>
 
@@ -55,4 +55,4 @@ const mapDispatch = ({ user: { showName, showNameAsync }}) => ({
   showNameAsync
 })
 
-export default connect(mapState, mapDispatch)(AuthLogin)
+export default connect(mapState, mapDispatch)(PassportLogin)

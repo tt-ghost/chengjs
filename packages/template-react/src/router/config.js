@@ -8,8 +8,16 @@ export default {
     path: '/user',
     component: () => import('../views/user/Home'),
   }, {
-    path: '/auth/login',
-    component: () => import('../views/auth/Login'),
+    path: '/passport',
+    children: [
+      {
+        path: '/login',
+        component: () => import('../views/passport/Login'),
+      }, {
+        path: '/register',
+        component: () => import('../views/passport/Register'),
+      }
+    ]
   }, {
     path: '/goods',
     component: () => import('../views/goods/Home'),

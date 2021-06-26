@@ -20,10 +20,10 @@ function replaceSlash (s) {
  */
 function flattenRoutes(routes, base = '') {
 
-  const newRoutes = []
+  let newRoutes = []
   
   routes.forEach(route => {
-
+    
     let { children, path, ...newRoute } = route
     base = replaceSlash(base)
     path = replaceSlash(path)
@@ -34,8 +34,7 @@ function flattenRoutes(routes, base = '') {
     newRoutes.push(newRoute)
 
     if (children && children.length) {
-      base = newRoute.path
-      newRoutes.concat(flattenRoutes(children, base))
+      newRoutes = newRoutes.concat(flattenRoutes(children, newRoute.path))
     }
   })
   return newRoutes
@@ -91,13 +90,13 @@ export default function (props = {}) {
     {newRoutes.map(route => {
       const { path, exact = true, component, ...props } = route
 
-      return <Route
+      return component ? <Route
         key={path}
         exact={exact}
         path={path}
         component={loadComponent(component)}
         {...props}
-      />
+      /> : null
     })}
 
   </Router>

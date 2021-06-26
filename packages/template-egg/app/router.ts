@@ -5,7 +5,7 @@ export default (app: Application) => {
 
   router.get('/', controller.home.index);
   router.get('/user', controller.user.get);
-  router.post('/auth/login', controller.auth.login);
-  router.get('/auth/logout', controller.auth.logout);
-  router.put('/auth/register', controller.auth.register);
+  router.post('/passport/login', controller.passport.login);
+  router.get('/passport/logout', controller.passport.logout);
+  router.put('/passport/register', controller.passport.register);
 };

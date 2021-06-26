@@ -2,10 +2,10 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportAuth = require('../../../app/middleware/auth');
+import ExportPassport = require('../../../app/middleware/passport');
 
 declare module 'egg' {
   interface IMiddleware {
-    auth: typeof ExportAuth;
+    passport: typeof ExportPassport;
   }
 }

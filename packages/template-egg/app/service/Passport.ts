@@ -1,7 +1,7 @@
 import { Service } from 'egg'
 import { AES, enc } from 'crypto-js'
 
-export default class Auth extends Service {
+export default class Passport extends Service {
 
   /**
    * 创建密码
