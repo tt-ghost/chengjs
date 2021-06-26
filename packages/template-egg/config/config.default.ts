@@ -19,27 +19,9 @@ export default (appInfo: EggAppInfo) => {
     },
   }
 
-  // // valparams插件参数
-  // config.valparams = {
-  //   locale    : 'zh-cn',
-  //   throwError: false
-  // };
-
   config.crypto = {
     secret: 'ksfSFF9f3SDF2-akjMLnfji03OJfIEjeuJnevqS'
   };
-
-  // config.mysql = {
-  //   client: {
-  //     host: '127.0.0.1',
-  //     port: '3306',
-  //     user: 'root',
-  //     password: '12345678',
-  //     database: 'server_egg'
-  //   },
-  //   app: true,
-  //   agent: false
-  // };
 
   config.sequelize = {
     dialect: 'mysql',
@@ -62,9 +44,11 @@ export default (appInfo: EggAppInfo) => {
   // }
 
   // github passport
+  // detail: https://eggjs.org/zh-cn/tutorials/passport
   config.passportGithub = {
     key: '',
-    secret: ''
+    secret: '',
+    callbackURL: '/passport/github/callback'
   };
 
   // add your special config in here

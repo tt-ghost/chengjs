@@ -4,5 +4,6 @@ declare module 'egg' {
   interface Application {
     mysql: any;
     validate: any;
+    passport: any;
   }
 }

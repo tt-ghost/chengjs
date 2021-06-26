@@ -51,4 +51,15 @@ export default class AuthController extends Controller{
       message: 'logout'
     }
   }
+
+  /**
+   * 用户退出登录
+   */
+   public async githubCallback() {
+    const { ctx } = this
+
+    ctx.body = {
+      message: 'github'
+    }
+  }
 }
