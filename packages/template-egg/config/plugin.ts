@@ -48,7 +48,7 @@ const plugin: EggPlugin = {
   passportGithub: {
     enable: true,
     package: 'egg-passport-github',
-  }
+  },
 };
 
 export default plugin;

@@ -80,10 +80,11 @@ function loadComponent(com) {
 /**
  * 根路由组件
  */
-export default function (props = {}) {
+function WrapperRouter(props = {}) {
   const { mode = 'history', base = '', routes = [] } = config
   const Router = mode === 'history' ? BrowserRouter : HashRouter
   const newRoutes = flattenRoutes(routes, base)
+  const { getUser } = props
 
   return <Router base={base} { ...props }>
 
@@ -101,3 +102,5 @@ export default function (props = {}) {
 
   </Router>
 }
+
+export default WrapperRouter

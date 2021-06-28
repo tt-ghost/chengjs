@@ -1,4 +1,5 @@
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
+import { passportGithub } from '../../../../config'
 
 export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<EggAppConfig>;
@@ -11,7 +12,18 @@ export default (appInfo: EggAppInfo) => {
   config.middleware = [];
 
   // redis
-  config.redis = {};
+  config.redis = {
+    client: {
+      port: 6379,          // Redis port
+      host: '127.0.0.1',   // Redis host
+      password: '',
+      db: 0,
+    },
+    agent: true
+  };
+
+  
+  config.sessionRedis = {};
 
   config.security = {
     csrf: {
@@ -28,8 +40,13 @@ export default (appInfo: EggAppInfo) => {
     host: '127.0.0.1',
     port: 3306,
     password: '12345678',
-    database: 'server_egg',
-    timezone:  '+08:00'
+    database: 'template_egg',
+    timezone:  '+08:00',
+    define: {
+      freezeTableName: true, // 冻结表名，防止建表时表名修改为复数形式
+      underscored: false, // 防止驼峰式字段被转为下划线
+      timestamps: false
+    }
   };
 
   // 参数校验
@@ -45,11 +62,7 @@ export default (appInfo: EggAppInfo) => {
 
   // github passport
   // detail: https://eggjs.org/zh-cn/tutorials/passport
-  config.passportGithub = {
-    key: '',
-    secret: '',
-    callbackURL: '/passport/github/callback'
-  };
+  config.passportGithub = passportGithub;
 
   // add your special config in here
   const bizConfig = {

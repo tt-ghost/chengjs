@@ -6,36 +6,33 @@ export default class UserController extends Controller {
    */
   public async get() {
     const { ctx } = this
-    const name = ctx.cookies.get('name', {
-      signed: false
-    })
-    const user = await ctx.service.user.getOneByName(name)
-    if (!user) {
-      ctx.status = 404
+
+    if (ctx.user) {
+      ctx.body = ctx.user
     } else {
-      ctx.body = user
-    }
-  }
-  /**
-   * 添加用户
-   */
-  public async add() {
-    const { ctx } = this
-    const name = 'xx'
-    ctx.cookies.set('user', name, {
-      httpOnly: true
-    })
-    ctx.body = {
-      name
+      ctx.status = 401
+      ctx.body = {
+        redirectURL: '/api/passport/login'
+      }
     }
   }
 
   /**
-   * 删除用户
+   * 获取指定用户信息
    */
-  public async remove() {
+   public async getUserByName() {
     const { ctx } = this
-    ctx.cookies.set('user', null)
-    ctx.status = 204
+    ctx.body = ctx.user
+    const { name } = ctx.params
+    const user = await ctx.service.user.getOneByName(name)
+
+    if (user) {
+      ctx.body = user
+    } else {
+      ctx.status = 404
+      ctx.body = {
+        message: 'not found'
+      }
+    }
   }
 }

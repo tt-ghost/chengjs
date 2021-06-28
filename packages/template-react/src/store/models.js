@@ -1,20 +1,27 @@
+import { get } from '../helper'
+
 export const user = {
   state: {
-    name: ''
+    user: {}
   }, // initial state
   reducers: {
-    showName(state, payload) {
-      console.log(11, state, payload)
+    updateUser (state, payload) {
       return {
-        name: payload.name
+        user: payload.user
       }
     }
   },
   effects: {
-    async showNameAsync(payload, rootState) {
-      console.log(22, payload, rootState)
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      this.showName(payload)
+    async getUser(payload, rootState) {
+      try {
+        const user = await get('/api/user').catch(e => {
+          console.log('ee', e)
+        })
+      } catch (e) {
+        console.log('error: ', e)
+      }
+
+      this.updateUser({ user })
     }
   }
 }

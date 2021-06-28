@@ -2,7 +2,7 @@
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
-import ExportPassport = require('../../../app/middleware/passport');
+import ExportPassport from '../../../app/middleware/passport';
 
 declare module 'egg' {
   interface IMiddleware {

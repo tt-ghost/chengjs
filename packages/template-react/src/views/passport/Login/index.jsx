@@ -8,11 +8,11 @@ function PassportLogin (props) {
   const ref = createRef()
 
   function getValues () {
-    const { name, password, repassword } = ref.current
+    const { name, password, rememberMe } = ref.current
     return {
       name: name.value,
       password: password.value,
-      repassword: repassword.value,
+      rememberMe: rememberMe.value,
     }
   }
 
@@ -22,23 +22,27 @@ function PassportLogin (props) {
     post('/api/passport/login', values)
   }
 
-
   return <div className='passport-login'>
     <form ref={ref}>
 
       <div className='passport-login-item'>
-        <label>username:</label>
+        <label>用户名:</label>
         <input name='name' />
       </div>
 
       <div className='passport-login-item'>
-        <label>password:</label>
+        <label>密码:</label>
         <input name='password' />
       </div>
 
       <div className='passport-login-item'>
-        <label>repassword:</label>
-        <input name='repassword' />
+        <label>记住密码:</label>
+        <input name='rememberMe' type='checkbox' />
+      </div>
+
+      <div className='passport-login-item'>
+        <label>第三方登录:</label>
+        <a href='/api/passport/github/callback' target='_blank'>Github</a>
       </div>
 
       <div className='passport-login-item passport-login-submit'>
@@ -50,9 +54,8 @@ function PassportLogin (props) {
 }
 
 const mapState = ({ user }) => ({ user })
-const mapDispatch = ({ user: { showName, showNameAsync }}) => ({
-  showName,
-  showNameAsync
+const mapDispatch = ({ user: { getUser }}) => ({
+  getUser
 })
 
 export default connect(mapState, mapDispatch)(PassportLogin)

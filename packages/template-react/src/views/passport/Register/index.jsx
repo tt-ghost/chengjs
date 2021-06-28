@@ -1,7 +1,7 @@
 import React, { createRef } from 'react';
 import { connect } from 'react-redux'
 import './style.scss'
-import { post } from '../../../helper'
+import { put } from '../../../helper'
 
 function PassportRegister (props) {
 
@@ -19,7 +19,7 @@ function PassportRegister (props) {
   function onSubmit(e) {
     e.preventDefault()
     const values = getValues()
-    post('/api/auth/login', values)
+    put('/api/passport/register', values)
   }
 
 

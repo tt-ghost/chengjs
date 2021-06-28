@@ -3,9 +3,16 @@
 export default app => {
   const { STRING, INTEGER, DATE } = app.Sequelize;
 
-  const User = app.model.define('users', {
-    id: { type: INTEGER, primaryKey: true, autoIncrement: true },
-    name: STRING(30),
+  const User = app.model.define('user', {
+    id: {
+      type: INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    name: STRING(50),
+    display_name: STRING(100),
+    photo: STRING(2000),
+    sex: STRING(10),
     age: INTEGER,
     created_at: DATE,
     updated_at: DATE,

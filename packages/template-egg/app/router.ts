@@ -7,8 +7,8 @@ export default (app: Application) => {
 
   router.get('/', controller.home.index);
   router.get('/user', controller.user.get);
+  router.get('/user/:name', controller.user.getUserByName);
   router.post('/passport/login', controller.passport.login);
   router.get('/passport/logout', controller.passport.logout);
   router.put('/passport/register', controller.passport.register);
-  // router.get('/passport/github/callback', controller.passport.githubCallback);
 };
