@@ -1,0 +1,27 @@
+{
+  "name": "@chengjs/cli",
+  "main": "./bin/main.js",
+  "private": true,
+  "author": "Chengzi <ttghost@126.com>",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "cheng",
+    "build": "tsc -w && pnpm link --global"
+  },
+  "bin": {
+    "cheng": "./bin/main.js"
+  },
+  "dependencies": {
+    "ora": "^6.1.2",
+    "commander": "^9.4.0",
+    "esbuild": "^0.15.2",
+    "inquirer": "^9.1.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.1",
+    "@types/node": "^18.7.3",
+    "lodash": "^4.17.21",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  }
+}

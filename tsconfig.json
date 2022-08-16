@@ -4,7 +4,6 @@
   ],
   "exclude": [
     "node_modules",
-    "./types",
     "./examples",
     "test/**/*.ts"
   ],
@@ -21,6 +20,7 @@
     "sourceMap": false,
     "outDir": "./lib",
     "downlevelIteration": true,
-    "types": ["@types/jest", "@types/node"]
+    "typeRoots": ["./node_modules/@types", "./types"],
+    "types": ["@types/jest"]
   }
 }
