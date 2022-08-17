@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 import { Command } from 'commander'
 import inquirer from 'inquirer';
-
+  
+// TODO: 格式化
 const program = new Command();
-
+   
 const prompts = [
   {
     name: '描述',
