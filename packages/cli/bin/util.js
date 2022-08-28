@@ -1,33 +1,25 @@
-"use strict";
-var __rest = (this && this.__rest) || function (s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.validate = exports.merge = void 0;
-const merge = function (...configs) {
-    let result = {};
-    if (configs.length) {
-        result = configs.reduce((pre, result) => {
-            const { server } = pre, others = __rest(pre, ["server"]);
-            if (typeof server === 'object' && server !== null) {
-                server;
-            }
-            return Object.assign({}, pre, result);
-        }, {});
-    }
-    return result;
-};
-exports.merge = merge;
-const validate = (config) => {
-    // console.log('validate: ', config)
-    return true;
-};
-exports.validate = validate;
+
+// interface MergeRegurn {
+//   server?: {[key: string]: any},
+//   [key: string]: any
+// }
+
+export const merge = function (...config) {
+  let result = {}
+
+  if (config.length) {
+    result = config.reduce((pre, result) => {
+      const { server, ...others } = pre
+      if (typeof server === 'object' && server !== null) {
+        console.log(server, others)
+      }
+      return Object.assign({}, pre, result)
+    }, {})
+  }
+  return result
+}
+
+export const validate = (config) => {
+  // console.log('validate: ', config)
+  return true
+}

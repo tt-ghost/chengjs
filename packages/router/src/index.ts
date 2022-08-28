@@ -1,17 +1,16 @@
 import { join, resolveLocation, match } from './url'
-import { Route, RouteConf, State } from './router.d'
-
+// import { Route, RouteConf, State } from '../types/src/router'
 
 export default class Router{
   mode: string
-  routes: Array<Route>
+  routes: Route[]
   base: string
   route: Route
 
   constructor(config: RouteConf) {
     this.mode = config.mode || 'history'
     this.routes = config.routes ||[]
-    this.base = config.base || '/'
+    this.base = config.base || ''
     this.route = resolveLocation()
     window.addEventListener('popstate', this.listener.bind(this))
   }
@@ -49,8 +48,8 @@ export default class Router{
     const { base } = this
     const matched: Route = match(this.routes, base)
 
-    onComplete(matched)
     if (typeof onComplete === 'function') {
+      onComplete(matched)
     }
   }
   

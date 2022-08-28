@@ -1,16 +1,9 @@
 node_modules
-*/**/node_modules
 package-lock.json
-*/**/package-lock.json
 yarn.lock
-*/**/yarn.lock
 *.log
-*/**/*.log
 dist
-*/**/dist
 *.map
-*/**/*.map
 .DS_Store
-*/**/.DS_Store
 coverage
-*/**/coverage
+.vscode

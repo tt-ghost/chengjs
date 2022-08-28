@@ -1,4 +1,4 @@
-import { OriginLocation, Location, Route } from './router.d'
+// import { OriginLocation, Location, Route } from '../types/src/router'
 
 export function join (base: string, path: string) {
   const clean = s => s.trim().replace(/^\./g, '').replace(/^\//g, '').replace(/\/$/g, '')
@@ -7,7 +7,7 @@ export function join (base: string, path: string) {
   return base + '/' + path
 }
 
-export function resolve(loca: OriginLocation = location): Location {
+export function resolve(loca: OriginLocation = location): RouterLocation {
   const { hash, host, pathname, port, protocol, search } = loca
   const query = resolveSearch(search)
 
@@ -22,12 +22,12 @@ export function resolve(loca: OriginLocation = location): Location {
   }
 }
 
-export function resolveLocation (local: OriginLocation = location): Location {
+export function resolveLocation (local: OriginLocation = location): RouterLocation {
   return resolve(local)
 }
 
-export function match(routes: Route[], base: string = '', local?: OriginLocation): Route {
-  const loca: Location = resolveLocation(local)
+export function match<T extends Route>(routes: T[], base: string = '', local?: OriginLocation): T {
+  const loca:RouterLocation = resolve(local)
 
   return routes.find(route => (base + route.path) === loca.path)
 }

@@ -1,3 +1,4 @@
+import { expect, test} from 'vitest'
 import {
   join,
   resolve,
@@ -5,7 +6,7 @@ import {
   resolveSearch
 } from '../src/url'
 
-describe('测试url工具库', () => {
+// describe('测试url工具库', () => {
   // join(base, path)
   test('join(base, path) util test', () => {
     expect(join(' /base/', '/subpath')).toEqual('base/subpath')
@@ -86,4 +87,4 @@ describe('测试url工具库', () => {
     expect(resolveSearch('?name=zhang&age=12&age=13')).toEqual({name: 'zhang', age: ['12', '13']})
   })
 
-})
+// })

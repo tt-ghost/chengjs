@@ -1,5 +1,5 @@
-import router from './router/index'
-import { Route } from '../src/router.d'
+import router from './router'
+// import { Route } from '../src/router.d'
 
 function get (id: string): HTMLElement {
   return document.getElementById(id)

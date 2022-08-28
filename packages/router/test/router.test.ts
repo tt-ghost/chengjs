@@ -1,7 +1,7 @@
+import { expect, test} from 'vitest'
 import Router from '../src/index'
 
-describe('Router测试', () => {
-  test('new Router()', () => {
+test('Router测试', () => {
     const genLocal = () => {
       return {
         base: '/',
@@ -19,5 +19,4 @@ describe('Router测试', () => {
     }
     expect(new Router({})).toEqual(genLocal())
     expect(new Router({base: '/base'})).toEqual({...genLocal(), base: '/base'})
-  })
 })

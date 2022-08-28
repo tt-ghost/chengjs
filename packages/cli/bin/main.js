@@ -1,45 +1,63 @@
 #!/usr/bin/env node
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const commander_1 = require("commander");
-const inquirer_1 = __importDefault(require("inquirer"));
-const program = new commander_1.Command();
+const { Command } = require('commander')
+const inquirer = require('inquirer')
+const pkg = require('../package.json')
+
+const program = new Command()
 const prompts = [
-    {
-        name: '描述',
-        message: '请输入描述信息',
-        default: '',
-    }, {
-        name: '作者',
-        message: '请输入作者',
-        default: '',
-    }
-];
+  {
+    name: 'desc',
+    message: '请输入描述信息',
+    default: pkg.description || ''
+  }, {
+    name: 'author',
+    message: '请输入作者',
+    default: pkg.author || ''
+  }
+]
+
 program
-    .name('cheng')
-    .description('cheng cli')
-    .version('0.1.0');
+  .name(pkg.name)
+  .description(pkg.description)
+  .version(pkg.version)
+
+program.description('获取版本')
+  .option('-v, --version', '获取版本')
+
+// program.command('create')
+//   .description('打包')
+//   .argument('<string>', 'string to split')
+//   .option('--first', 'display just the first substring')
+//   .option('-s, --separator <char>', 'separator character', ',')
+//   .action(async (str, options) => {
+//     const limit = options.first ? 1 : undefined;
+//     console.log(str.split(options.separator, limit));
+//     const answers = await inquirer.prompt(prompts)
+//     console.log('answers: ', answers)
+//   });
+
 program.command('build')
-    .description('打包')
-    // .argument('<string>', 'string to split')
-    // .option('--first', 'display just the first substring')
-    // .option('-s, --separator <char>', 'separator character', ',')
-    .action((str, options) => __awaiter(void 0, void 0, void 0, function* () {
-    const limit = options.first ? 1 : undefined;
-    console.log(str.split(options.separator, limit));
-    const answers = yield inquirer_1.default.prompt(prompts);
-    console.log('answers: ', answers);
-}));
-program.parse();
+  .description('打包')
+  .argument('<string>', 'string to split')
+  .option('--first', 'display just the first substring')
+  .option('-s, --separator <char>', 'separator character', ',')
+  .action(async (str, options) => {
+    const limit = options.first ? 1 : undefined
+    console.log(str.split(options.separator, limit))
+    const answers = await inquirer.prompt(prompts)
+    console.log('answers: ', answers)
+  })
+
+program.command('init')
+  .description('初始化项目')
+  // .argument('<string>', '项目名称', pkg.name || '')
+  // .option('--first', 'display just the first substring')
+  // .option('-s, --separator <char>', 'separator character', ',')
+  .action(async (str, options) => {
+    console.log(999, str, options)
+    // 1. download template
+    // 2. add standard
+    // 3. check project
+  })
+
+program.parse()

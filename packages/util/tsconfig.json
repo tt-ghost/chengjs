@@ -1,26 +1,24 @@
 {
   "includes": [
-    "./src",
-    "./examples",
+    "src/**/*.ts"
   ],
   "exclude": [
-    // "./examples",
+    "node_modules",
   ],
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "es5",
     "module": "ESNext",
     "declaration": true,
     "declarationMap": false,
     "declarationDir": "./types",
-    "moduleResolution": "Node",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "sourceMap": false,
-    "rootDirs": ["src"],
     "outDir": "./lib",
     "downlevelIteration": true,
-    "typeRoots": ["node_modules/@types","types"],
-    "types": ["eslint", "node"]
+    "typeRoots": ["node_modules/@types", "types"],
+    "types": ["node", "vitest/globals"]
   }
 }

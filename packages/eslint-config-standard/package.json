@@ -1,5 +1,5 @@
 {
-  "name": "@chengjs/standard",
+  "name": "@chengjs/eslint-config-standard",
   "private": false,
   "version": "0.1.0",
   "author": "Chengzi <ttghost@126.com>",
