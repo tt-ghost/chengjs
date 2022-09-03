@@ -1,6 +1,3 @@
-
 module.exports = {
-  extends: [
-    'chengjs:standard'
-  ]
+  extends: ['plugin:@chengjs/recommended']
 }

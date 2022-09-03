@@ -3,6 +3,7 @@
   "private": false,
   "version": "0.1.0",
   "author": "Chengzi <ttghost@126.com>",
+  "main": "main.js",
   "dependencies": {
     "@types/node": "^18.7.6",
     "@typescript-eslint/parser": "^5.33.1",

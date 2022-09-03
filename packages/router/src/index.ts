@@ -9,7 +9,7 @@ export default class Router{
 
   constructor(config: RouteConf) {
     this.mode = config.mode || 'history'
-    this.routes = config.routes ||[]
+    this.routes = config.routes || []
     this.base = config.base || ''
     this.route = resolveLocation()
     window.addEventListener('popstate', this.listener.bind(this))
@@ -22,7 +22,9 @@ export default class Router{
     }
 
     window.history.pushState(state, null, url)
-    dispatchEvent(new PopStateEvent('popstate', { state: { ... state, onComplete } }))
+    dispatchEvent(
+      new PopStateEvent('popstate', { state: { ...state, onComplete } })
+    )
   }
 
   replace(url: string, onComplete: () => void): void {
@@ -32,10 +34,12 @@ export default class Router{
     }
 
     window.history.replaceState(state, null, url)
-    dispatchEvent(new PopStateEvent('popstate', { state: { ... state, onComplete } }))
+    dispatchEvent(
+      new PopStateEvent('popstate', { state: { ...state, onComplete } })
+    )
   }
 
-  go (step: number): void {
+  go(step: number): void {
     window.history.go(step)
   }
 
@@ -43,7 +47,9 @@ export default class Router{
     // cb(to, from, next)
   }
 
-  listener (e: { state: { url: string, onComplete?: (route: Route) => void } }): void {
+  listener(e: {
+    state: { url: string; onComplete?: (route: Route) => void }
+  }): void {
     const { url, onComplete } = e.state
     const { base } = this
     const matched: Route = match(this.routes, base)
@@ -52,5 +58,4 @@ export default class Router{
       onComplete(matched)
     }
   }
-  
 }

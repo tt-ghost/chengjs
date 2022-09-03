@@ -24,6 +24,6 @@
     "sourceMap": false,
     "outDir": "./lib",
     "downlevelIteration": true,
-    "types": ["@types/jest", "@types/node"]
+    "types": ["@types/node"]
   }
 }

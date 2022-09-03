@@ -9,20 +9,17 @@ const prompts = [
     name: 'desc',
     message: '请输入描述信息',
     default: pkg.description || ''
-  }, {
+  },
+  {
     name: 'author',
     message: '请输入作者',
     default: pkg.author || ''
   }
 ]
 
-program
-  .name(pkg.name)
-  .description(pkg.description)
-  .version(pkg.version)
+program.name(pkg.name).description(pkg.description).version(pkg.version)
 
-program.description('获取版本')
-  .option('-v, --version', '获取版本')
+program.description('获取版本').option('-v, --version', '获取版本')
 
 // program.command('create')
 //   .description('打包')
@@ -36,7 +33,8 @@ program.description('获取版本')
 //     console.log('answers: ', answers)
 //   });
 
-program.command('build')
+program
+  .command('build')
   .description('打包')
   .argument('<string>', 'string to split')
   .option('--first', 'display just the first substring')
@@ -48,7 +46,8 @@ program.command('build')
     console.log('answers: ', answers)
   })
 
-program.command('init')
+program
+  .command('init')
   .description('初始化项目')
   // .argument('<string>', '项目名称', pkg.name || '')
   // .option('--first', 'display just the first substring')
