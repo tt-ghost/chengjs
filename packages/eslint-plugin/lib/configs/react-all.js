@@ -1,6 +1,6 @@
 "use strict";
 module.exports = {
-    extends: ['eslint:all', 'plugin:react/all', 'prettier'],
+    extends: ['eslint:all', 'plugin:react/all', "plugin:react-hooks/recommended", 'prettier'],
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
@@ -12,7 +12,7 @@ module.exports = {
             tsx: true
         }
     },
-    plugins: ['react', 'react-hooks'],
+    plugins: ['react', 'react-hooks', 'prettier'],
     rules: {
         'react/react-in-jsx-scope': 'off'
     }

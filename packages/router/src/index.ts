@@ -1,7 +1,7 @@
 import { join, resolveLocation, match } from './url'
 // import { Route, RouteConf, State } from '../types/src/router'
 
-export default class Router{
+export default class Router {
   mode: string
   routes: Route[]
   base: string

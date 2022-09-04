@@ -1,9 +1,9 @@
+import defaultConfig from './config'
+import { merge, validate } from './util'
 import path from 'path'
 import fs from 'fs'
 import http from 'http'
 import esbuild from 'esbuild'
-import defaultConfig from './config'
-import { merge, validate } from './util'
 
 const configName = 'cheng.config.js'
 const userConfigPath = path.resolve(process.cwd(), configName)

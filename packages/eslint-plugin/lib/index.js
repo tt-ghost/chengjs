@@ -7,6 +7,7 @@ const vue_1 = __importDefault(require("./configs/vue"));
 const react_1 = __importDefault(require("./configs/react"));
 const react_all_1 = __importDefault(require("./configs/react-all"));
 const recommended_1 = __importDefault(require("./configs/recommended"));
+const vue3_recommended_1 = __importDefault(require("./configs/vue3-recommended"));
 module.exports = {
     env: {
         browser: true,
@@ -26,6 +27,7 @@ module.exports = {
     configs: {
         typescript: typescript_1.default,
         vue: vue_1.default,
+        'vue3-recommended': vue3_recommended_1.default,
         react: react_1.default,
         'react-all': react_all_1.default,
         recommended: recommended_1.default

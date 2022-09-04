@@ -1,3 +1,3 @@
 module.exports = {
-  extends: [require('./lib/configs/typescript')]
+  extends: require.resolve('./lib/configs/typescript')
 }

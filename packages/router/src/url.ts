@@ -1,7 +1,7 @@
 // import { OriginLocation, Location, Route } from '../types/src/router'
 
-export function join(base: string, path: string){
-  const clean = s =>
+export function join(base: string, path: string) {
+  const clean = (s: string) =>
     s.trim().replace(/^\./g, '').replace(/^\//g, '').replace(/\/$/g, '')
   base = clean(base)
   path = clean(path)
@@ -31,7 +31,7 @@ export function resolveLocation(
 
 export function match<T extends Route>(
   routes: T[],
-  base: string = '',
+  base = '',
   local?: OriginLocation
 ): T {
   const loca: RouterLocation = resolve(local)
