@@ -1,0 +1,19 @@
+{
+  "includes": ["src/**/*.ts"],
+  "compilerOptions": {
+    "target": "es5",
+    "module": "ESNext",
+    "declaration": true,
+    "declarationMap": false,
+    "declarationDir": "./types",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "sourceMap": false,
+    "outDir": "./lib",
+    "downlevelIteration": true,
+    "typeRoots": ["node_modules/@types", "types"],
+    "types": ["node", "vitest/globals"]
+  }
+}
