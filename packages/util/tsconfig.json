@@ -1,10 +1,5 @@
 {
-  "includes": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-  ],
+  "includes": ["src/**/*.ts"],
   "compilerOptions": {
     "target": "es5",
     "module": "ESNext",

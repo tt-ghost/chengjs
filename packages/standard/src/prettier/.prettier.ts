@@ -1,5 +1,5 @@
 // https://prettier.io/docs/en/configuration.html
-module.exports = {
+export default {
   tabWidth: 2,
   useTabs: false,
   singleQuote: true,
