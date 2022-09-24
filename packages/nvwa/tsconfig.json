@@ -1,19 +1,24 @@
 {
   "includes": ["src/**/*.ts"],
+  "exclude": ["lib", "tests", "node_modules"],
   "compilerOptions": {
-    "target": "es5",
-    "module": "ESNext",
-    "declaration": true,
+    "target": "ES2015",
+    "module": "CommonJS",
+    "declaration": false,
     "declarationMap": false,
-    "declarationDir": "./types",
+    // "declarationDir": "./types",
+    // 编译的时候删除注释
+    "removeComments": false,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true,
+    "resolveJsonModule": false,
     "sourceMap": false,
-    "outDir": "./lib",
+    "rootDir": "src",
+    // "rootDirs": ["src"],
+    "outDir": "lib",
     "downlevelIteration": true,
     "typeRoots": ["node_modules/@types", "types"],
-    "types": ["node", "vitest/globals"]
+    "types": ["node", "vitest/globals"],
   }
 }

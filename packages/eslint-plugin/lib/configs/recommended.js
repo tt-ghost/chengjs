@@ -7,7 +7,7 @@ module.exports = {
         'plugin:vue/recommended',
         'prettier'
     ],
-    plugin: ['react', 'react-hooks', 'prettier'],
+    plugins: ['react', 'react-hooks', 'prettier'],
     rules: {
         '@typescript-eslint/no-var-requires': 'off'
     }

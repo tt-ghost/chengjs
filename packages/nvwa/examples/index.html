@@ -3,10 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@chengjs/copy</title>
+  <title>@chengjs/nvwa 表达式解析器</title>
+  <style>
+    *{
+      box-sizing: border-box;
+      margin: 0;
+    }
+    .nvwa-root{
+      display: flex;
+      color: #333;
+      padding: 16px;
+    }
+    .source{
+      width: 500px;
+    }
+    .ast{
+      flex: 1;
+      color: #666;
+      padding: 16px;
+      border: 1px solid #aaa;
+      margin-left: 16px;
+    }
+    .source textarea{
+      width: 100%;
+      height: 200px;
+      padding: 8px;
+    }
+  </style>
+  
 </head>
 <body>
-  <input type='textarea' id='textarea' />
-  <button id='copy'>Copy Text</button>
+  <div class="nvwa-root">
+    <div class="source">
+      <textarea id='source'></textarea>
+    </div>
+    <pre class="ast" id="ast">
+AST
+    </pre>
+  </div>
+  <button id='gen'>生成AST</button>
+  <script src="./main.js" type="module"></script>
 </body>
 </html>
