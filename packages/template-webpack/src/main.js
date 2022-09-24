@@ -1,19 +1,19 @@
-const {
+import {
   getBase,
   getIP,
   resolveEnv,
   useLess,
   useTs,
   useOptimization,
-  useBanner
-} = require('./helper.js')
+  useBanner,
+} from "./helper.js";
 
-module.exports = {
+export default {
   getBase,
   getIP,
   resolveEnv,
   useLess,
   useTs,
   useOptimization,
-  useBanner
-}
+  useBanner,
+};
