@@ -1,4 +1,3 @@
-
 // https://leetcode-cn.com/problems/zi-fu-chuan-de-pai-lie-lcof/solution/zi-fu-chuan-de-pai-lie-by-leetcode-solut-hhvs/
 // 输入：s = "abc"
 // 输出：["abc","acb","bac","bca","cab","cba"]
@@ -9,9 +8,9 @@
  * @param {string} s
  * @return {string[]}
  */
-var permutation = function(s) {
-  let ans = [""];
-  
+export const permutation = function (s: string): string[] {
+  let ans = [];
+
   for (const ch of s) {
     const tmp = new Set();
     for (const cur of ans) {
@@ -19,16 +18,16 @@ var permutation = function(s) {
         tmp.add(cur.slice(0, j) + ch + cur.slice(j));
       }
     }
-    ans = [...tmp];
+    ans = Array.from(tmp);
   }
 
   return ans;
 };
 
-console.log(permutation("abc"))
+// console.log(permutation("abc"));
 
-chai.expect(permutation("abc"))
-.to.have.members(["abc","acb","bac","bca","cab","cba"])
+// chai
+//   .expect(permutation("abc"))
+//   .to.have.members(["abc", "acb", "bac", "bca", "cab", "cba"]);
 
-chai.expect(permutation("abc"))
-.to.have.length(6)
+// chai.expect(permutation("abc")).to.have.length(6);

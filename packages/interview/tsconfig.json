@@ -1,0 +1,24 @@
+{
+  // "includes": ["src/**/*.ts"],
+  "exclude": ["lib", "tests", "node_modules"],
+  "compilerOptions": {
+    "target": "ES2015",
+    "module": "CommonJS",
+    "declaration": false,
+    "declarationMap": false,
+    // "declarationDir": "./types",
+    // 编译的时候删除注释
+    "removeComments": false,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": false,
+    "sourceMap": false,
+    // "rootDir": "./",
+    // "rootDirs": ["src"],
+    "outDir": "lib",
+    "downlevelIteration": true,
+    "typeRoots": ["node_modules/@types", "types"],
+    "types": ["node"]
+  }
+}
