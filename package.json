@@ -4,6 +4,6 @@
   "version": "independent",
   "author": "Chengzi <ttghost@126.com>",
   "devDependencies": {
-    "@chengjs/eslint-plugin": "^0.3.0"
+    "@chengjs/eslint-plugin": "^0.3.1"
   }
 }

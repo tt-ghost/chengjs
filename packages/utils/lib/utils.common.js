@@ -39,7 +39,7 @@ const BASE_TYPE = [
     "number",
     "boolean",
     "undefined",
-    "bitint",
+    "bigint",
     "symbol",
     null,
 ];
@@ -54,7 +54,7 @@ const isNumber = (val) => is(val, "Number");
 const isNull = (val) => is(val, "Null");
 const isUndefined = (val) => is(val, "Undefined");
 const isSymbol = (val) => is(val, "Symbol");
-const isBitInt = (val) => is(val, "BigInt");
+const isBigInt = (val) => is(val, "BigInt");
 const isArray = (val) => Array.isArray(val);
 const isObject = (val) => is(val, "Object");
 const isPromise = (val) => is(val, "Promise");
@@ -74,49 +74,43 @@ const isDate = (val) => {
     }
     return false;
 };
-// TODO: 修复循环引用
 const deepClone = (val) => {
     const map = new Map();
+    // 函数、bitInt、Symbol类型的数据，在作为object值时会删除，在数组中转为null
+    // const isIgnoreType = (val) =>
+    //   isFunction(val) || isSymbol(val) || isBigInt(val) || isUndefined(val);
     const clone = (val) => {
-        if (isBaseType(val))
-            return val;
         if (isFunction(val))
             return undefined;
+        if (isSymbol(val))
+            return Symbol(val.description);
+        if (isBaseType(val))
+            return val;
         if (isArray(val)) {
+            const newVal = [];
             // 循环引用返回第一次clone的引用
-            if (map.has(val)) {
-                console.log("");
+            if (map.has(val))
                 return map.get(val);
-            }
-            else {
-                const newVal = val.map((item) => {
-                    // 数组中的函数返回null，同 JSON.stringify 处理
-                    if (isFunction(item))
-                        return null;
-                    return clone(item);
-                });
-                map.set(val, newVal);
-                return newVal;
-            }
+            map.set(val, newVal);
+            newVal.push(...val.map((item) => {
+                if (isFunction(item))
+                    return null;
+                return clone(item);
+            }));
+            return newVal;
         }
         if (isObject(val)) {
+            const newVal = {};
             // 循环引用返回第一次clone的引用
-            if (map.has(val)) {
+            if (map.has(val))
                 return map.get(val);
+            map.set(val, newVal);
+            for (const key in val) {
+                if (isFunction(val[key]))
+                    continue;
+                newVal[key] = clone(val[key]);
             }
-            else {
-                const newVal = {};
-                for (const key in val) {
-                    // 对象值为函数时不 clone
-                    console.log("++++ ", key, val[key]);
-                    if (isFunction(val[key]))
-                        continue;
-                    console.log("--- ", key, val[key]);
-                    newVal[key] = clone(val[key]);
-                }
-                map.set(val, newVal);
-                return newVal;
-            }
+            return newVal;
         }
     };
     return clone(val);
@@ -127,7 +121,7 @@ exports.deepClone = deepClone;
 exports.is = is;
 exports.isArray = isArray;
 exports.isBaseType = isBaseType;
-exports.isBitInt = isBitInt;
+exports.isBigInt = isBigInt;
 exports.isBoolean = isBoolean;
 exports.isDate = isDate;
 exports.isDom = isDom;

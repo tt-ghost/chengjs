@@ -33,7 +33,7 @@ const BASE_TYPE = [
   "number",
   "boolean",
   "undefined",
-  "bitint",
+  "bigint",
   "symbol",
   null,
 ];
@@ -49,7 +49,7 @@ export const isNumber = (val: any) => is(val, "Number");
 export const isNull = (val: any) => is(val, "Null");
 export const isUndefined = (val: any) => is(val, "Undefined");
 export const isSymbol = (val: any) => is(val, "Symbol");
-export const isBitInt = (val: any) => is(val, "BigInt");
+export const isBigInt = (val: any) => is(val, "BigInt");
 export const isArray = (val: any) => Array.isArray(val);
 export const isObject = (val: any) => is(val, "Object");
 export const isPromise = (val: any) => is(val, "Promise");
@@ -72,43 +72,39 @@ export const isDate = (val: any) => {
   return false;
 };
 
-// TODO: 修复循环引用
 export const deepClone = (val: any) => {
   const map = new Map();
   const clone = (val: any) => {
-    if (isBaseType(val)) return val;
     if (isFunction(val)) return undefined;
+    if (isSymbol(val)) return Symbol(val.description);
+    if (isBaseType(val)) return val;
     if (isArray(val)) {
+      const newVal = [];
       // 循环引用返回第一次clone的引用
-      if (map.has(val)) {
-        console.log("");
-        return map.get(val);
-      } else {
-        const newVal = val.map((item) => {
-          // 数组中的函数返回null，同 JSON.stringify 处理
+      if (map.has(val)) return map.get(val);
+      map.set(val, newVal);
+
+      newVal.push(
+        ...val.map((item) => {
           if (isFunction(item)) return null;
           return clone(item);
-        });
-        map.set(val, newVal);
-        return newVal;
-      }
+        })
+      );
+
+      return newVal;
     }
     if (isObject(val)) {
+      const newVal = {};
       // 循环引用返回第一次clone的引用
-      if (map.has(val)) {
-        return map.get(val);
-      } else {
-        const newVal = {};
-        for (const key in val) {
-          // 对象值为函数时不 clone
-          console.log("++++ ", key, val[key]);
-          if (isFunction(val[key])) continue;
-          console.log("--- ", key, val[key]);
-          newVal[key] = clone(val[key]);
-        }
-        map.set(val, newVal);
-        return newVal;
+      if (map.has(val)) return map.get(val);
+      map.set(val, newVal);
+
+      for (const key in val) {
+        if (isFunction(val[key])) continue;
+
+        newVal[key] = clone(val[key]);
       }
+      return newVal;
     }
   };
   return clone(val);
