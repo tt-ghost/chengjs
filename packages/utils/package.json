@@ -1,8 +1,8 @@
 {
   "name": "@chengjs/utils",
   "version": "0.1.0",
-  "main": "./lib/cutils.min.js",
-  "module": "./lib/cutils.esm.js",
+  "main": "./lib/utils.min.js",
+  "module": "./lib/utils.esm.js",
   "types": "types/main.d.ts",
   "author": "Chengzi <ttghost@126.com>",
   "description": "chengjs utils",

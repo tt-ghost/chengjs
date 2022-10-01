@@ -49,14 +49,14 @@ const umd = merge({
   output: {
     file: "lib/utils.umd.js",
     format: "umd",
-    name: "cutils",
+    name: "utils",
   },
 });
 const min = merge({
   output: {
-    file: "lib/utils.min.js",
+    file: "lib/utils.js",
     format: "umd",
-    name: "cutils",
+    name: "utils",
   },
   plugins: [...base.plugins, terser()],
 });
