@@ -1,35 +1,18 @@
 /**
  * name: @chengjs/utils
  * version: v0.1.0
+ * author: vChengzi <ttghost@126.com>
  */
 
 /**
- * 复制字符串到系统剪切板中
- * @param text 待复制的文本
- * @returns void
- * @examples
- * ```js
- * copy('copy test')
- * ```
+ * 列表转对象
+ * @param list eg: [2,4]
+ * @returns { 2: 2, 4: 3 }
  */
-async function copy(text) {
-    if (typeof window === "undefined")
-        return;
-    const readPromise = await navigator.permissions.query({
-        name: "clipboard-read",
-    });
-    const writePromise = await navigator.permissions.query({
-        name: "clipboard-write",
-    });
-    const [readPerm, writePerm] = await Promise.all([readPromise, writePromise]);
-    if (["granted", "prompt"].indexOf(readPerm.state) > -1 ||
-        ["granted", "prompt"].indexOf(writePerm.state) > -1) {
-        await navigator.clipboard.writeText(text);
-    }
-    else {
-        await Promise.reject("请授权剪切板");
-    }
-}
+const mapListToObject = (list) => {
+    return list.reduce((result, val) => ((result[val] = val), result), {});
+};
+
 const BASE_TYPE = [
     "string",
     "number",
@@ -70,11 +53,9 @@ const isDate = (val) => {
     }
     return false;
 };
+
 const deepClone = (val) => {
     const map = new Map();
-    // 函数、bitInt、Symbol类型的数据，在作为object值时会删除，在数组中转为null
-    // const isIgnoreType = (val) =>
-    //   isFunction(val) || isSymbol(val) || isBigInt(val) || isUndefined(val);
     const clone = (val) => {
         if (isFunction(val))
             return undefined;
@@ -112,4 +93,75 @@ const deepClone = (val) => {
     return clone(val);
 };
 
-export { copy, deepClone, is, isArray, isBaseType, isBigInt, isBoolean, isDate, isDom, isFunction, isNull, isNumber, isObject, isPromise, isRegExp, isString, isSymbol, isUndefined };
+/**
+ * 解析URL
+ * @param url url 地址
+ * @returns object
+ */
+const parseURL = (url) => {
+    const [start, end = ""] = url.split("?");
+    const [protocol, domainAndPath = ""] = start.split(/:?\/\//);
+    // const [domain, port = 80] = domainAndPath.split(":");
+    const [paramsString = "", hash = ""] = end.split("#");
+    const paramsList = paramsString.split("&");
+    const params = paramsList.reduce((result, val) => {
+        const [key, value] = val;
+        // 数字类型转为数字
+        const parsedVal = isNaN(Number(value)) ? value : Number(value);
+        if (key in result) {
+            if (Array.isArray(result[key])) {
+                result[key].push(parsedVal);
+            }
+            else {
+                result[key] = [result[key], parsedVal];
+            }
+        }
+        else {
+            result[key] = parsedVal;
+        }
+        return result;
+    }, {});
+    const domainRegStr = "((?:[a-zA-Z\\d][a-zA-Z\\d-]*\\.)+[a-zA-Z\\d]+)";
+    const portRegStr = "(?::(\\d+))?";
+    const pathRegStr = "((?:\\/[a-zA-Z-\\d]+)*)";
+    const reg = new RegExp(domainRegStr + portRegStr + pathRegStr);
+    const [, domain = "", port = "80", path = ""] = domainAndPath.match(reg) || [];
+    return {
+        protocol,
+        domain,
+        port,
+        path,
+        params,
+        hash,
+    };
+};
+
+/**
+ * 复制字符串到系统剪切板中
+ * @param text 待复制的文本
+ * @returns void
+ * @examples
+ * ```js
+ * copy('copy test')
+ * ```
+ */
+async function copy(text) {
+    if (typeof window === "undefined")
+        return;
+    const readPromise = await navigator.permissions.query({
+        name: "clipboard-read",
+    });
+    const writePromise = await navigator.permissions.query({
+        name: "clipboard-write",
+    });
+    const [readPerm, writePerm] = await Promise.all([readPromise, writePromise]);
+    if (["granted", "prompt"].indexOf(readPerm.state) > -1 ||
+        ["granted", "prompt"].indexOf(writePerm.state) > -1) {
+        await navigator.clipboard.writeText(text);
+    }
+    else {
+        await Promise.reject("请授权剪切板");
+    }
+}
+
+export { copy, deepClone, is, isArray, isBaseType, isBigInt, isBoolean, isDate, isDom, isFunction, isNull, isNumber, isObject, isPromise, isRegExp, isString, isSymbol, isUndefined, mapListToObject, parseURL };

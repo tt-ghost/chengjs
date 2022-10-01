@@ -4,6 +4,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import { terser } from "rollup-plugin-terser";
 import pkg from "./package.json";
+import path from "path";
 
 const banner = `/**
  * name: ${pkg.name}
@@ -21,7 +22,14 @@ const base = {
   external: {
     jquery: "$",
   },
-  plugins: [resolve(), typescript(), json()],
+  plugins: [
+    resolve(),
+    typescript({
+      // include: ["src/**/*.ts", "types"],
+      tsconfig: path.resolve(__dirname, "tsconfig.json"),
+    }),
+    json(),
+  ],
 };
 
 const merge = (conf) =>
