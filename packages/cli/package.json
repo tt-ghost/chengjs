@@ -25,7 +25,7 @@
     "ora": "^6.1.2"
   },
   "devDependencies": {
-    "@chengjs/eslint-plugin": "^0.2.2",
+    "@chengjs/eslint-plugin": "^0.3.2",
     "@types/inquirer": "^9.0.1",
     "@types/node": "^18.7.14",
     "lodash": "^4.17.21",

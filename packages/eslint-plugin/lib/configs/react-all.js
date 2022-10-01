@@ -1,6 +1,12 @@
 "use strict";
 module.exports = {
-    extends: ['eslint:all', 'plugin:react/all', "plugin:react-hooks/recommended", 'prettier'],
+    root: true,
+    extends: [
+        'eslint:all',
+        'plugin:react/all',
+        'plugin:react-hooks/recommended',
+        'prettier'
+    ],
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',

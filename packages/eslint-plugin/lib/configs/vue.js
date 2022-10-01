@@ -1,5 +1,6 @@
 "use strict";
 module.exports = {
+    root: true,
     extends: ['eslint:recommended', 'plugin:vue/recommended', 'prettier'],
     parser: 'vue-eslint-parser',
     parserOptions: {

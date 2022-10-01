@@ -11,7 +11,7 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@chengjs/eslint-plugin": "^0.2.2",
+    "@chengjs/eslint-plugin": "^0.3.2",
     "@types/jest": "^29.0.0",
     "@types/node": "^18.7.14",
     "html-webpack-plugin": "^5.5.0",

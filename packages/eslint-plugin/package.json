@@ -1,7 +1,7 @@
 {
   "name": "@chengjs/eslint-plugin",
   "private": false,
-  "version": "0.3.1",
+  "version": "0.3.2",
   "main": "./lib/index.js",
   "author": "Chengzi <ttghost@126.com>",
   "description": "chengjs eslint plugin",
@@ -21,7 +21,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@chengjs/standard": "^0.2.1",
+    "@chengjs/standard": "^0.3.0",
     "@types/node": "^18.7.14",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",

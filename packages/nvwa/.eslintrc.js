@@ -1,8 +1,7 @@
 module.exports = {
-  root: true,
   env: {
     node: true,
-    jest: true,
+    jest: true
   },
-  extends: ["plugin:@chengjs/typescript"],
-};
+  extends: ['plugin:@chengjs/typescript']
+}

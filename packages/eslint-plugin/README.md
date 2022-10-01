@@ -17,6 +17,6 @@ npm i @chengjs/eslint-plugin -D
 ```js
 // .eslintrc.js
 module.export = {
-  extends: ['plugin:@chengjs/recommended']
+  extends: ['plugin:@chengjs/typescript']
 }
 ```

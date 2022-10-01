@@ -1,5 +1,6 @@
 "use strict";
 module.exports = {
+    root: true,
     extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
@@ -7,7 +8,7 @@ module.exports = {
         'plugin:vue/recommended',
         'prettier'
     ],
-    plugins: ['react', 'react-hooks', 'prettier'],
+    plugins: ['react', 'react-hooks', '@typescript-eslint', 'prettier'],
     rules: {
         '@typescript-eslint/no-var-requires': 'off'
     }
