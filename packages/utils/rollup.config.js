@@ -8,6 +8,7 @@ import pkg from "./package.json";
 const banner = `/**
  * name: ${pkg.name}
  * version: v${pkg.version}
+ * author: v${pkg.author}
  */
 `;
 const base = {
