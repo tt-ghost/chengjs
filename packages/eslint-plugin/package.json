@@ -4,6 +4,18 @@
   "version": "0.3.1",
   "main": "./lib/index.js",
   "author": "Chengzi <ttghost@126.com>",
+  "description": "chengjs eslint plugin",
+  "license": "MIT",
+  "keywords": [
+    "eslint",
+    "plugin",
+    "chengjs"
+  ],
+  "repository": {
+    "url": "tt-ghost/chengjs",
+    "directory": "packages/eslint-plugin"
+  },
+  "homepage": "https://github.com/tt-ghost/chengjs/blob/master/packages/eslint-plugin/README.md",
   "scripts": {
     "start": "tsc -w",
     "build": "tsc"

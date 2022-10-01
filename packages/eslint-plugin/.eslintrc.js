@@ -1,3 +1,7 @@
 module.exports = {
-  extends: require.resolve('./lib/configs/typescript')
+  root: true,
+  extends: require.resolve('./lib/configs/typescript'),
+  env: {
+    node: true
+  }
 }

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "main": "./dist/nvwa.min.js",
   "module": "./dist/main.esm.js",
-  "types": "types/main.d.ts",
+  "types": "types/index.d.ts",
   "author": "Chengzi <ttghost@126.com>",
   "description": "chengjs nvwa",
   "scripts": {

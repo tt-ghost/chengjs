@@ -1,5 +1,5 @@
 {
-  "includes": ["src/**/*.ts"],
+  "includes": ["src/**/*.ts", "types", "tests"],
   "exclude": ["lib", "tests", "node_modules"],
   "compilerOptions": {
     "target": "ES2015",
@@ -19,6 +19,6 @@
     "outDir": "lib",
     "downlevelIteration": true,
     "typeRoots": ["node_modules/@types", "types"],
-    "types": ["node", "vitest/globals"],
+    "types": ["node", "vitest/globals"]
   }
 }
