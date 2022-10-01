@@ -16,6 +16,12 @@
     "lint:fix": "eslint ./bin --fix",
     "test:unit": "vitest"
   },
+  "files": [
+    "lib",
+    "types",
+    "docs",
+    "tsconfig.json"
+  ],
   "devDependencies": {
     "@chengjs/eslint-plugin": "^0.3.1",
     "@rollup/plugin-commonjs": "^22.0.2",
