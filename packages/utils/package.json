@@ -6,6 +6,18 @@
   "types": "types/main.d.ts",
   "author": "Chengzi <ttghost@126.com>",
   "description": "chengjs utils",
+  "license": "MIT",
+  "keywords": [
+    "utils",
+    "chengjs",
+    "helper",
+    "no dependence"
+  ],
+  "repository": {
+    "url": "tt-ghost/chengjs",
+    "directory": "packages/utils"
+  },
+  "homepage": "https://github.com/tt-ghost/chengjs/blob/master/packages/utils/README.md",
   "scripts": {
     "start": "pnpm run dev",
     "dev": "rollup -w -c rollup.config.js",
@@ -20,7 +32,7 @@
     "lib",
     "types",
     "docs",
-    "tsconfig.json"
+    "README.md"
   ],
   "devDependencies": {
     "@chengjs/eslint-plugin": "^0.3.1",
