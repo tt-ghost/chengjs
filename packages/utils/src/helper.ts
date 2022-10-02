@@ -1,7 +1,8 @@
 import { isFunction, isSymbol, isBaseType, isArray, isObject } from './type'
 
-export const deepClone = (val: any) => {
+export const deepClone = (val: unknown) => {
   const map = new Map()
+  // eslint-disable-next-line
   const clone = (val: any) => {
     if (isFunction(val)) return undefined
     if (isSymbol(val)) return Symbol(val.description)

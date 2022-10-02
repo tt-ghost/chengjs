@@ -12,9 +12,11 @@ export async function copy(text: string): Promise<void> {
 
   const readPromise = await navigator.permissions.query({
     name: 'clipboard-read'
+    // eslint-disable-next-line
   } as any)
   const writePromise = await navigator.permissions.query({
     name: 'clipboard-write'
+    // eslint-disable-next-line
   } as any)
   const [readPerm, writePerm] = await Promise.all([readPromise, writePromise])
 
