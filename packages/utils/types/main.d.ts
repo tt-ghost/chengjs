@@ -1,5 +1,7 @@
+// eslint-disable-next-line
 namespace CJ {
   type BASE_TYPE = string | number
+  // eslint-disable-next-line
   interface URL {
     protocol: string
     domain: string
