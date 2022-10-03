@@ -18,3 +18,4 @@ __exportStar(require("./editor"), exports);
 __exportStar(require("./git"), exports);
 __exportStar(require("./npm"), exports);
 __exportStar(require("./prettier"), exports);
+__exportStar(require("./eslint"), exports);

@@ -1,7 +1,5 @@
 import { writeFile } from '../utils'
 
-const gitignore = () => writeFile('.gitignore')
+const gitIgnore = () => writeFile('.gitignore')
 
-export {
-  gitignore
-}
+export { gitIgnore }

@@ -1,7 +1,5 @@
 import { writeFile } from '../utils'
 
-const editorconfig = () => writeFile('.editorconfig')
+const editorConfig = () => writeFile('.editorconfig')
 
-export {
-  editorconfig
-}
+export { editorConfig }
