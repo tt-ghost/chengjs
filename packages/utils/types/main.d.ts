@@ -1,4 +1,5 @@
 // eslint-disable-next-line
+// declare module 'CJ' {
 namespace CJ {
   type BASE_TYPE = string | number
   // eslint-disable-next-line

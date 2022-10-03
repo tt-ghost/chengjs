@@ -10,11 +10,6 @@
     (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.utils = {}));
 })(this, (function (exports) { 'use strict';
 
-    /**
-     * 列表转对象
-     * @param list eg: [2,4]
-     * @returns { 2: 2, 4: 3 }
-     */
     const mapListToObject = (list) => {
         return list.reduce((result, val) => ((result[val] = val), result), {});
     };
@@ -45,13 +40,10 @@
     const isPromise = (val) => is(val, 'Promise');
     const isRegExp = (val) => is(val, 'RegExp');
     const isDom = (val) => is(val, 'Element');
-    // eslint-disable-next-line
     const isDate = (val) => {
-        // 为数字或Date对象时，Invalid Date 也是Date 类型， 需排除掉
         if ((is(val, 'Date') || isString(val)) && !isNaN(new Date(val).valueOf())) {
             return true;
         }
-        // 为数字时，去掉正负极限，去掉小数
         if (isNumber(val) &&
             val !== Infinity &&
             val !== -Infinity &&
@@ -63,7 +55,6 @@
 
     const deepClone = (val) => {
         const map = new Map();
-        // eslint-disable-next-line
         const clone = (val) => {
             if (isFunction(val))
                 return undefined;
@@ -73,7 +64,6 @@
                 return val;
             if (isArray(val)) {
                 const newVal = [];
-                // 循环引用返回第一次clone的引用
                 if (map.has(val))
                     return map.get(val);
                 map.set(val, newVal);
@@ -86,7 +76,6 @@
             }
             if (isObject(val)) {
                 const newVal = {};
-                // 循环引用返回第一次clone的引用
                 if (map.has(val))
                     return map.get(val);
                 map.set(val, newVal);
@@ -101,20 +90,13 @@
         return clone(val);
     };
 
-    /**
-     * 解析URL
-     * @param url url 地址
-     * @returns object
-     */
     const parseURL = (url) => {
         const [start, end = ''] = url.split('?');
         const [protocol, domainAndPath = ''] = start.split(/:?\/\//);
-        // const [domain, port = 80] = domainAndPath.split(":");
         const [paramsString = '', hash = ''] = end.split('#');
         const paramsList = paramsString.split('&');
         const params = paramsList.reduce((result, val) => {
             const [key, value] = val.split('=');
-            // 数字类型转为数字
             let parsedVal;
             if (value === '') {
                 parsedVal = value;
@@ -150,25 +132,14 @@
         };
     };
 
-    /**
-     * 复制字符串到系统剪切板中
-     * @param text 待复制的文本
-     * @returns void
-     * @examples
-     * ```js
-     * copy('copy test')
-     * ```
-     */
     async function copy(text) {
         if (typeof window === 'undefined')
             return;
         const readPromise = await navigator.permissions.query({
             name: 'clipboard-read'
-            // eslint-disable-next-line
         });
         const writePromise = await navigator.permissions.query({
             name: 'clipboard-write'
-            // eslint-disable-next-line
         });
         const [readPerm, writePerm] = await Promise.all([readPromise, writePromise]);
         if (['granted', 'prompt'].indexOf(readPerm.state) > -1 ||
@@ -185,7 +156,6 @@
     const REG_URI_PORT = '(?::(\\d+))?';
     const REG_URI_PATH = '((?:\\/[a-z-\\d]+)*)';
 
-    // https://developer.mozilla.org/zh-CN/docs/Web/API/fetch
     const DEFAULT_REQUEST_OPTION = {
         method: 'GET',
         mode: 'cors',
@@ -206,31 +176,6 @@
             headers: { ...DEFAULT_REQUEST_OPTION.headers, ...headers }
         });
     };
-    /**
-     * http 库
-     * @example
-     *  const http = new HTTP({
-     *    baseURL: '/api',
-     *    headers: { cache: 'no-cache', token: 'xxx' }
-     *  })
-
-     *  const apis = {
-     *    getUser: '/user/info',
-     *    updateUser: 'PUT: /user/info',
-     *    sendUser: 'POST: http://test.com/user/add'
-     *  }
-
-     *  const api = http.create(apis)
-     *  // 默认发送 GET 请求 /api/user/info
-     *  const res = await api.getUser()
-     *  // 发送 PUT 请求 /api/user/info
-     *  const res = await api.updateUser({ name: 'chengjs' })
-     *  // 发送 POST 请求，第二个参数选项的method 比 url路径中声明的method优先级高
-     *  const res = await api.updateUser({ name: 'chengjs' }, { method: 'POST' })
-     *  // 忽略 baseURL，发送 POST 请求到 http://test.com/user/add
-     *  const res = await api.sendUser({ name: 'chengjs' })
-     *
-     */
     class HTTP {
         constructor(opt) {
             this.option = mergeOption(opt);

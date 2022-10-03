@@ -1,6 +1,6 @@
 {
   "exclude": ["node_modules", "tests"],
-  "includes": ["src/**/*.ts", "types"],
+  "includes": ["src/**/*.ts", "types/main.d.ts"],
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
@@ -11,8 +11,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": false,
+    "removeComments": true,
     "sourceMap": false,
-    "rootDir": "./src",
+    "baseUrl": "./src",
     "outDir": "./lib",
     "downlevelIteration": true,
     "typeRoots": ["node_modules/@types", "types"],
