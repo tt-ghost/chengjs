@@ -25,8 +25,8 @@ const base = {
   plugins: [
     resolve(),
     typescript({
-      resolveJsonModule: true,
-      // include: ['src/**/*.ts', 'types'],
+      // resolveJsonModule: true,
+      // include: ['src/**/*.ts', 'types/main.d.ts'],
       tsconfig: path.resolve(__dirname, 'tsconfig.json')
     }),
     json()
