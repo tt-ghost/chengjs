@@ -11,9 +11,14 @@ export const parseURL = (url: string): CJ.URL => {
   const [paramsString = '', hash = ''] = end.split('#')
   const paramsList = paramsString.split('&')
   const params = paramsList.reduce((result, val) => {
-    const [key, value] = val
+    const [key, value] = val.split('=')
     // 数字类型转为数字
-    const parsedVal = isNaN(Number(value)) ? value : Number(value)
+    let parsedVal: string | number
+    if (value === '') {
+      parsedVal = value
+    } else {
+      parsedVal = isNaN(Number(value)) ? value : Number(value)
+    }
 
     if (key in result) {
       if (Array.isArray(result[key])) {
@@ -26,11 +31,11 @@ export const parseURL = (url: string): CJ.URL => {
     }
     return result
   }, {})
-  const domainRegStr = '((?:[a-zA-Z\\d][a-zA-Z\\d-]*\\.)+[a-zA-Z\\d]+)'
+  const domainRegStr = '((?:[a-z\\d][a-z\\d-]*\\.)+[a-z\\d]+)'
   const portRegStr = '(?::(\\d+))?'
-  const pathRegStr = '((?:\\/[a-zA-Z-\\d]+)*)'
-  const reg = new RegExp(domainRegStr + portRegStr + pathRegStr)
-  const [, domain = '', port = '80', path = ''] = domainAndPath.match(reg) || []
+  const pathRegStr = '((?:\\/[a-z-\\d]+)*)'
+  const reg = new RegExp(domainRegStr + portRegStr + pathRegStr, 'i')
+  const [, domain = '', port = '', path = ''] = domainAndPath.match(reg) || []
 
   return {
     protocol,

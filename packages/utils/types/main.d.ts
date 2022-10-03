@@ -2,7 +2,7 @@
 namespace CJ {
   type BASE_TYPE = string | number
   // eslint-disable-next-line
-  interface URL {
+  export interface URL {
     protocol: string
     domain: string
     port: string

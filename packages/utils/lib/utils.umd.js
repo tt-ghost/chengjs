@@ -7,7 +7,7 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
     typeof define === 'function' && define.amd ? define(['exports'], factory) :
-    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.cutils = {}));
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.utils = {}));
 })(this, (function (exports) { 'use strict';
 
     /**
@@ -20,34 +20,35 @@
     };
 
     const BASE_TYPE = [
-        "string",
-        "number",
-        "boolean",
-        "undefined",
-        "bigint",
-        "symbol",
-        null,
+        'string',
+        'number',
+        'boolean',
+        'undefined',
+        'bigint',
+        'symbol',
+        null
     ];
     const is = (val, type) => {
         return Object.prototype.toString.call(val) === `[object ${type}]`;
     };
     const isBaseType = (val) => val === null || BASE_TYPE.indexOf(typeof val) !== -1;
-    const isFunction = (val) => is(val, "Function");
-    const isString = (val) => is(val, "String");
-    const isBoolean = (val) => is(val, "Boolean");
-    const isNumber = (val) => is(val, "Number");
-    const isNull = (val) => is(val, "Null");
-    const isUndefined = (val) => is(val, "Undefined");
-    const isSymbol = (val) => is(val, "Symbol");
-    const isBigInt = (val) => is(val, "BigInt");
+    const isFunction = (val) => is(val, 'Function');
+    const isString = (val) => is(val, 'String');
+    const isBoolean = (val) => is(val, 'Boolean');
+    const isNumber = (val) => is(val, 'Number');
+    const isNull = (val) => is(val, 'Null');
+    const isUndefined = (val) => is(val, 'Undefined');
+    const isSymbol = (val) => is(val, 'Symbol');
+    const isBigInt = (val) => is(val, 'BigInt');
     const isArray = (val) => Array.isArray(val);
-    const isObject = (val) => is(val, "Object");
-    const isPromise = (val) => is(val, "Promise");
-    const isRegExp = (val) => is(val, "RegExp");
-    const isDom = (val) => is(val, "Element");
+    const isObject = (val) => is(val, 'Object');
+    const isPromise = (val) => is(val, 'Promise');
+    const isRegExp = (val) => is(val, 'RegExp');
+    const isDom = (val) => is(val, 'Element');
+    // eslint-disable-next-line
     const isDate = (val) => {
         // 为数字或Date对象时，Invalid Date 也是Date 类型， 需排除掉
-        if ((is(val, "Date") || isString(val)) && !isNaN(new Date(val).valueOf())) {
+        if ((is(val, 'Date') || isString(val)) && !isNaN(new Date(val).valueOf())) {
             return true;
         }
         // 为数字时，去掉正负极限，去掉小数
@@ -62,6 +63,7 @@
 
     const deepClone = (val) => {
         const map = new Map();
+        // eslint-disable-next-line
         const clone = (val) => {
             if (isFunction(val))
                 return undefined;
@@ -75,7 +77,7 @@
                 if (map.has(val))
                     return map.get(val);
                 map.set(val, newVal);
-                newVal.push(...val.map((item) => {
+                newVal.push(...val.map(item => {
                     if (isFunction(item))
                         return null;
                     return clone(item);
@@ -105,15 +107,21 @@
      * @returns object
      */
     const parseURL = (url) => {
-        const [start, end = ""] = url.split("?");
-        const [protocol, domainAndPath = ""] = start.split(/:?\/\//);
+        const [start, end = ''] = url.split('?');
+        const [protocol, domainAndPath = ''] = start.split(/:?\/\//);
         // const [domain, port = 80] = domainAndPath.split(":");
-        const [paramsString = "", hash = ""] = end.split("#");
-        const paramsList = paramsString.split("&");
+        const [paramsString = '', hash = ''] = end.split('#');
+        const paramsList = paramsString.split('&');
         const params = paramsList.reduce((result, val) => {
-            const [key, value] = val;
+            const [key, value] = val.split('=');
             // 数字类型转为数字
-            const parsedVal = isNaN(Number(value)) ? value : Number(value);
+            let parsedVal;
+            if (value === '') {
+                parsedVal = value;
+            }
+            else {
+                parsedVal = isNaN(Number(value)) ? value : Number(value);
+            }
             if (key in result) {
                 if (Array.isArray(result[key])) {
                     result[key].push(parsedVal);
@@ -127,18 +135,18 @@
             }
             return result;
         }, {});
-        const domainRegStr = "((?:[a-zA-Z\\d][a-zA-Z\\d-]*\\.)+[a-zA-Z\\d]+)";
-        const portRegStr = "(?::(\\d+))?";
-        const pathRegStr = "((?:\\/[a-zA-Z-\\d]+)*)";
-        const reg = new RegExp(domainRegStr + portRegStr + pathRegStr);
-        const [, domain = "", port = "80", path = ""] = domainAndPath.match(reg) || [];
+        const domainRegStr = '((?:[a-z\\d][a-z\\d-]*\\.)+[a-z\\d]+)';
+        const portRegStr = '(?::(\\d+))?';
+        const pathRegStr = '((?:\\/[a-z-\\d]+)*)';
+        const reg = new RegExp(domainRegStr + portRegStr + pathRegStr, 'i');
+        const [, domain = '', port = '', path = ''] = domainAndPath.match(reg) || [];
         return {
             protocol,
             domain,
             port,
             path,
             params,
-            hash,
+            hash
         };
     };
 
@@ -152,21 +160,23 @@
      * ```
      */
     async function copy(text) {
-        if (typeof window === "undefined")
+        if (typeof window === 'undefined')
             return;
         const readPromise = await navigator.permissions.query({
-            name: "clipboard-read",
+            name: 'clipboard-read'
+            // eslint-disable-next-line
         });
         const writePromise = await navigator.permissions.query({
-            name: "clipboard-write",
+            name: 'clipboard-write'
+            // eslint-disable-next-line
         });
         const [readPerm, writePerm] = await Promise.all([readPromise, writePromise]);
-        if (["granted", "prompt"].indexOf(readPerm.state) > -1 ||
-            ["granted", "prompt"].indexOf(writePerm.state) > -1) {
+        if (['granted', 'prompt'].indexOf(readPerm.state) > -1 ||
+            ['granted', 'prompt'].indexOf(writePerm.state) > -1) {
             await navigator.clipboard.writeText(text);
         }
         else {
-            await Promise.reject("请授权剪切板");
+            await Promise.reject('请授权剪切板');
         }
     }
 
