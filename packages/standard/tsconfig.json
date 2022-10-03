@@ -1,23 +1,22 @@
 {
-  "includes": ["src"],
-  "exclude": ["lib", "types", "node_modules"],
+  "includes": ["src/**/*.ts"],
+  "exclude": ["lib", "node_modules"],
   "compilerOptions": {
     "target": "ESNext",
     "module": "CommonJS",
     "declaration": false,
     "declarationMap": false,
     // "declarationDir": "types",
-    // 编译的时候删除注释
-    "removeComments": false,
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
+    // 编译的时候删除注释
+    "removeComments": false,
     "sourceMap": false,
     // "rootDirs": ["src"],
     "baseUrl": "./src",
-    "outDir": "lib",
-    "allowJs": true,
+    "outDir": "./lib",
     "downlevelIteration": true,
     "typeRoots": ["node_modules/@types"],
     "types": ["node"]
