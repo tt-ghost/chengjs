@@ -5,7 +5,7 @@
   "module": "./lib/utils.esm.js",
   "types": "types/main.d.ts",
   "author": "Chengzi <ttghost@126.com>",
-  "description": "chengjs utils",
+  "description": "chengjs utils 前端工具集",
   "license": "MIT",
   "keywords": [
     "utils",

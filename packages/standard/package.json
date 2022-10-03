@@ -3,6 +3,7 @@
   "private": false,
   "version": "0.4.0",
   "author": "Chengzi <ttghost@126.com>",
+  "description": "chengjs standard 前端规范集",
   "main": "./lib/index.js",
   "scripts": {
     "start": "tsc -w",

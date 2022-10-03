@@ -4,7 +4,7 @@
   "version": "0.3.2",
   "main": "./lib/index.js",
   "author": "Chengzi <ttghost@126.com>",
-  "description": "chengjs eslint plugin",
+  "description": "chengjs eslint plugin eslint规范",
   "license": "MIT",
   "keywords": [
     "eslint",
