@@ -1,26 +1,22 @@
 {
-  "includes": [
-    "./src",
-    "./examples",
-  ],
-  "exclude": [
-    // "./examples",
-  ],
+  "includes": ["src/**/*.ts", "tests", "types"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2020",
     "module": "ESNext",
-    "declaration": true,
+    "declaration": false,
     "declarationMap": false,
-    "declarationDir": "./types",
-    "moduleResolution": "Node",
+    // "declarationDir": "./types",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true,
+    "resolveJsonModule": false,
+    "removeComments": true,
     "sourceMap": false,
-    "rootDirs": ["src"],
+    "baseUrl": "./src",
     "outDir": "./lib",
     "downlevelIteration": true,
-    "typeRoots": ["node_modules/@types","types"],
-    "types": ["eslint", "node"]
+    "typeRoots": ["node_modules/@types", "types"],
+    "types": ["node", "jest"]
   }
 }

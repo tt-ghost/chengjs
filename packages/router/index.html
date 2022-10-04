@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chengjs Router</title>
+  </head>
+  <body>
+    <div id="root">root</div>
+    <button id="push">pushState:./home?name=zhangsan&age=2&age=4</button>
+    <button id="go">go:-1</button>
+    <button id="log">log:router</button>
+    <script type="module">
+      import Router from './lib/router.esm.js'
+
+      window.Router = Router
+      const renderPage = (name, props) =>
+        `<div class="home"> ${name} page</div>`
+
+      const config = {
+        base: '/examples',
+        mode: 'history',
+        component: 'examples home',
+        routes: [
+          {
+            path: '/home',
+            name: 'home',
+            component: renderPage('home'),
+            children: []
+          },
+          {
+            path: '/user/:userID',
+            name: 'user',
+            component: renderPage('user'),
+            redirect: '/setting'
+          },
+          {
+            path: '/setting',
+            name: 'setting',
+            component: Promise.resolve(() => renderPage('setting'))
+          }
+        ]
+      }
+      const router = new Router(config)
+
+      function get(id) {
+        return document.getElementById(id)
+      }
+
+      // elements
+      const root = get('root')
+      const push = get('push')
+      const go = get('go')
+      const log = get('log')
+
+      const loadPage = (component, props) => {
+        if (component instanceof Promise) {
+          component.then(res => {
+            return loadPage(component, props)
+          })
+        } else if (typeof component === 'function') {
+          root.innerHTML = component(props)
+        } else {
+          root.innerHTML = component
+        }
+      }
+
+      const onComplete = route => {
+        console.log(3423, route)
+        if (!route) return
+        loadPage(route.component)
+      }
+      const listen = el => {
+        el.addEventListener('click', e => {
+          const path = e.target.innerText.split(':')[1]
+          router.push(path, onComplete)
+        })
+      }
+
+      listen(push)
+      listen(go)
+      listen(log)
+    </script>
+  </body>
+</html>

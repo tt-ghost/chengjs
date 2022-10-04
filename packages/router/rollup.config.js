@@ -13,7 +13,7 @@ const banner = `/**
  */
 `
 const base = {
-  input: './src/main.ts',
+  input: './src/index.ts',
   output: {
     banner,
     sourcemap: false,
@@ -41,30 +41,31 @@ const merge = conf =>
 
 const esm = merge({
   output: {
-    file: 'lib/utils.esm.js',
+    file: 'lib/router.esm.js',
     format: 'esm'
   }
 })
 
 const umd = merge({
   output: {
-    file: 'lib/utils.umd.js',
+    file: 'lib/router.umd.js',
     format: 'umd',
-    name: 'utils'
+    name: 'Router'
   }
 })
 const min = merge({
   output: {
-    file: 'lib/utils.js',
+    file: 'lib/router.js',
     format: 'umd',
-    name: 'utils'
+    name: 'Router'
   },
   plugins: [...base.plugins, terser()]
 })
 const cjs = merge({
   output: {
-    file: 'lib/utils.common.js',
-    format: 'cjs'
+    file: 'lib/router.common.js',
+    format: 'cjs',
+    exports: 'default'
   },
   plugins: [...base.plugins, commonjs()]
 })

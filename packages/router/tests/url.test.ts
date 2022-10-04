@@ -1,18 +1,14 @@
-import { expect, test} from 'vitest'
-import {
-  join,
-  resolve,
-  match,
-  resolveSearch
-} from '../src/url'
+import { join, resolve, match, resolveSearch } from '../src/url'
 
-// describe('测试url工具库', () => {
+describe('测试url工具库', () => {
   // join(base, path)
   test('join(base, path) util test', () => {
     expect(join(' /base/', '/subpath')).toEqual('base/subpath')
     expect(join(' ./base ', './subpath')).toEqual('base/subpath')
     expect(join('base', './subpath/')).toEqual('base/subpath')
-    expect(join('http://base.com/', './subpath/')).toEqual('http://base.com/subpath')
+    expect(join('http://base.com/', './subpath/')).toEqual(
+      'http://base.com/subpath'
+    )
   })
 
   // resolve(local)
@@ -82,9 +78,14 @@ import {
 
   // resolveSearch(search)
   test('resolveSearch(search)', () => {
-    expect(resolveSearch('?name=zhang')).toEqual({name: 'zhang'})
-    expect(resolveSearch('?name=zhang&age=12')).toEqual({name: 'zhang', age: '12'})
-    expect(resolveSearch('?name=zhang&age=12&age=13')).toEqual({name: 'zhang', age: ['12', '13']})
+    expect(resolveSearch('?name=zhang')).toEqual({ name: 'zhang' })
+    expect(resolveSearch('?name=zhang&age=12')).toEqual({
+      name: 'zhang',
+      age: '12'
+    })
+    expect(resolveSearch('?name=zhang&age=12&age=13')).toEqual({
+      name: 'zhang',
+      age: ['12', '13']
+    })
   })
-
-// })
+})
