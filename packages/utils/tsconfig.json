@@ -1,6 +1,6 @@
 {
-  "includes": ["src/**/*.ts", "types/main.d.ts"],
-  "exclude": ["node_modules", "tests"],
+  "includes": ["src/**/*.ts", "tests", "types/main.d.ts"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
     "target": "ES2020",
     "module": "ESNext",
@@ -17,6 +17,6 @@
     "outDir": "./lib",
     "downlevelIteration": true,
     "typeRoots": ["node_modules/@types", "types"],
-    "types": ["node"]
+    "types": ["node", "jest"]
   }
 }
