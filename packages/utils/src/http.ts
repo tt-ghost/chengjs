@@ -16,12 +16,17 @@ const DEFAULT_REQUEST_OPTION: CJ.HTTP_OPTION = {
   referrer: 'client'
 }
 
-const mergeOption = opt => {
-  const { headers = {}, method, ...others } = opt || {}
-  return Object.assign({}, others, {
-    method: (method || '').toUpperCase(),
-    headers: { ...DEFAULT_REQUEST_OPTION.headers, ...headers }
-  })
+const mergeConfig = (config1, config2) => {
+  const { headers: h1, method: m1, ...others1 } = config1 || {}
+  const { headers: h2, method: m2, ...others2 } = config2 || {}
+  return Object.assign(
+    {},
+    { ...others1, ...others2 },
+    {
+      method: (m2 || m1 || '').toUpperCase(),
+      headers: Object.assign({}, h1 || {}, h2 || {})
+    }
+  )
 }
 
 /**
@@ -51,10 +56,10 @@ const mergeOption = opt => {
  */
 
 export class HTTP {
-  public option: any
+  public config: any
 
   constructor(opt) {
-    this.option = mergeOption(opt)
+    this.config = mergeConfig(DEFAULT_REQUEST_OPTION, opt)
   }
   async fetch(url: string, opt?: CJ.HTTP_OPTION) {
     return await window.fetch(url, opt as any)
@@ -78,7 +83,7 @@ export class HTTP {
       return url
     } else {
       return (
-        this.option.baseURL.replace(/\/$/, '') + '/' + url.replace(/^\//, '')
+        this.config.baseURL.replace(/\/$/, '') + '/' + url.replace(/^\//, '')
       )
     }
   }
@@ -92,16 +97,18 @@ export class HTTP {
     const result = {}
     for (const name in apis) {
       const { method: urlMethod, url } = this.parseAPI(apis[name])
-      result[name] = (data, option) => {
-        console.log(123, data)
-        const { headers, method, ...others } = option || {}
+      result[name] = (data, config) => {
         const opt = {
-          method: (method || '').toUpperCase() || urlMethod,
-          headers: headers || {},
-          ...others,
+          ...mergeConfig(this.config, config),
           body: data !== null ? JSON.stringify(data) : undefined
         }
+
+        if (!opt.method) {
+          opt.method = (urlMethod || '').toUpperCase()
+        }
+
         if (['GET', 'HEAD'].indexOf(opt.method) > -1) opt.body = undefined
+
         return this.fetch(this.resolve(url), opt).then(res => {
           if (opt.headers['Content-Type'] === 'application/json') {
             return res.json()
