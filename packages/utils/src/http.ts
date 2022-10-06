@@ -57,7 +57,7 @@ export class HTTP {
     this.option = mergeOption(opt)
   }
   async fetch(url: string, opt?: CJ.HTTP_OPTION) {
-    await window.fetch(url, opt as any)
+    return await window.fetch(url, opt as any)
   }
 
   parseAPI(api: string) {
@@ -66,7 +66,7 @@ export class HTTP {
       url: api
     }
     if (api.indexOf(':') > -1) {
-      const [, method = '', url = api] = api.match(/(^[a-zA-Z]+):\s+(.*)/) || []
+      const [, method = '', url = api] = api.match(/(^[a-zA-Z]+):\s*(.*)/) || []
       if (method) result.method = method
       if (url) result.url = url
     }
@@ -102,7 +102,13 @@ export class HTTP {
           body: data !== null ? JSON.stringify(data) : undefined
         }
         if (['GET', 'HEAD'].indexOf(opt.method) > -1) opt.body = undefined
-        return this.fetch(this.resolve(url), opt)
+        return this.fetch(this.resolve(url), opt).then(res => {
+          if (opt.headers['Content-Type'] === 'application/json') {
+            return res.json()
+          } else {
+            return res
+          }
+        })
       }
     }
     return result

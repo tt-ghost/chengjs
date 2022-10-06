@@ -1,7 +1,7 @@
 /**
  * name: @chengjs/utils
- * version: v0.2.0
- * author: vChengzi <ttghost@126.com>
+ * version: v0.2.1
+ * author: Chengzi <ttghost@126.com>
  */
 
 const mapListToObject = (list) => {
@@ -175,7 +175,7 @@ class HTTP {
         this.option = mergeOption(opt);
     }
     async fetch(url, opt) {
-        await window.fetch(url, opt);
+        return await window.fetch(url, opt);
     }
     parseAPI(api) {
         const result = {
@@ -183,7 +183,7 @@ class HTTP {
             url: api
         };
         if (api.indexOf(':') > -1) {
-            const [, method = '', url = api] = api.match(/(^[a-zA-Z]+):\s+(.*)/) || [];
+            const [, method = '', url = api] = api.match(/(^[a-zA-Z]+):\s*(.*)/) || [];
             if (method)
                 result.method = method;
             if (url)
@@ -214,7 +214,14 @@ class HTTP {
                 };
                 if (['GET', 'HEAD'].indexOf(opt.method) > -1)
                     opt.body = undefined;
-                return this.fetch(this.resolve(url), opt);
+                return this.fetch(this.resolve(url), opt).then(res => {
+                    if (opt.headers['Content-Type'] === 'application/json') {
+                        return res.json();
+                    }
+                    else {
+                        return res;
+                    }
+                });
             };
         }
         return result;
