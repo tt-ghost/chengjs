@@ -1,5 +1,10 @@
 export = {
   root: true,
+  env: {
+    jest: true,
+    node: true,
+    browser: true
+  },
   extends: [
     'eslint:all',
     'plugin:react/all',

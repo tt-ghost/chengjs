@@ -1,5 +1,10 @@
 export = {
   root: true,
+  env: {
+    jest: true,
+    node: true,
+    browser: true
+  },
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',

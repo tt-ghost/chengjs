@@ -1,6 +1,12 @@
 "use strict";
 module.exports = {
-    extends: ['eslint:recommended', 'plugin:vue/vue3-essential', 'plugin:vue/vue3-recommended', 'prettier'],
+    root: true,
+    env: {
+        jest: true,
+        node: true,
+        browser: true
+    },
+    extends: ['plugin:vue/vue3-essential', 'plugin:vue/vue3-recommended', 'prettier'],
     parser: 'vue-eslint-parser',
     parserOptions: {
         // parser: "@typescript-eslint/parser",
@@ -24,6 +30,8 @@ module.exports = {
             tsx: true
         }
     },
-    plugins: ['@typescript-eslint', 'prettier'],
-    rules: {}
+    plugins: ['prettier'],
+    rules: {
+        "vue/multi-word-component-names": "off"
+    }
 };

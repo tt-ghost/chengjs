@@ -1,6 +1,11 @@
 "use strict";
 module.exports = {
     root: true,
+    env: {
+        jest: true,
+        node: true,
+        browser: true
+    },
     extends: ['eslint:recommended', 'plugin:vue/recommended', 'prettier'],
     parser: 'vue-eslint-parser',
     parserOptions: {
