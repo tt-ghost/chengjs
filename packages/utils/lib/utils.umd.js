@@ -1,6 +1,6 @@
 /**
  * name: @chengjs/utils
- * version: v0.2.1
+ * version: v0.2.2
  * author: Chengzi <ttghost@126.com>
  */
 
@@ -161,7 +161,7 @@
         mode: 'cors',
         baseURL: '',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: {},
         credentials: 'same-origin',
@@ -192,7 +192,7 @@
             if (api.indexOf(':') > -1) {
                 const [, method = '', url = api] = api.match(/(^[a-zA-Z]+):\s*(.*)/) || [];
                 if (method)
-                    result.method = method;
+                    result.method = method.toUpperCase();
                 if (url)
                     result.url = url;
             }
@@ -213,20 +213,24 @@
                 result[name] = (data, config) => {
                     const opt = {
                         ...mergeConfig(this.config, config),
+                        method: urlMethod,
                         body: data !== null ? JSON.stringify(data) : undefined
                     };
-                    if (!opt.method) {
-                        opt.method = (urlMethod || '').toUpperCase();
+                    if (config.method) {
+                        opt.method = config.method.toUpperCase();
                     }
                     if (['GET', 'HEAD'].indexOf(opt.method) > -1)
-                        opt.body = undefined;
+                        delete opt.body;
                     return this.fetch(this.resolve(url), opt).then(res => {
-                        if (opt.headers['Content-Type'] === 'application/json') {
+                        let isJson = false;
+                        res.headers.forEach((v, k) => {
+                            if (k.toLowerCase() === 'content-type' && v.indexOf('application/json') > -1) {
+                                isJson = true;
+                            }
+                        });
+                        if (isJson)
                             return res.json();
-                        }
-                        else {
-                            return res;
-                        }
+                        return res;
                     });
                 };
             }
