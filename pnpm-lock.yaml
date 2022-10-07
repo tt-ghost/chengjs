@@ -57,6 +57,7 @@ importers:
       prettier: ^2.7.1
       ts-node: ^10.9.1
       typescript: ^4.8.2
+      vue-eslint-parser: ^9.1.0
     dependencies:
       '@chengjs/standard': 0.3.0
       '@types/node': 18.7.14
@@ -76,6 +77,7 @@ importers:
       prettier: 2.7.1
       ts-node: 10.9.1_tphhiizkxv2hzwkunblc3hbmra
       typescript: 4.8.2
+      vue-eslint-parser: 9.1.0_eslint@8.23.0
 
   packages/interview:
     specifiers:
@@ -2311,7 +2313,7 @@ packages:
       nth-check: 2.1.1
       postcss-selector-parser: 6.0.10
       semver: 7.3.7
-      vue-eslint-parser: 9.0.3_eslint@8.23.0
+      vue-eslint-parser: 9.1.0_eslint@8.23.0
       xml-name-validator: 4.0.0
     transitivePeerDependencies:
       - supports-color
@@ -4821,8 +4823,8 @@ packages:
     resolution: {integrity: sha512-gu73tuZfJgu+mvCSy4UZwd2JXykjK9zAZsfmDeut5dx/1a7FeTk0XwJsSuqQn+cuMCGVbIBfl+s53X4T19DnzQ==}
     dev: true
 
-  /vue-eslint-parser/9.0.3_eslint@8.23.0:
-    resolution: {integrity: sha512-yL+ZDb+9T0ELG4VIFo/2anAOz8SvBdlqEnQnvJ3M7Scq56DvtjY0VY88bByRZB0D4J0u8olBcfrXTVONXsh4og==}
+  /vue-eslint-parser/9.1.0_eslint@8.23.0:
+    resolution: {integrity: sha512-NGn/iQy8/Wb7RrRa4aRkokyCZfOUWk19OP5HP6JEozQFX5AoS/t+Z0ZN7FY4LlmWc4FNI922V7cvX28zctN8dQ==}
     engines: {node: ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=6.0.0'
