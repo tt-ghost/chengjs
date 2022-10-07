@@ -7,7 +7,7 @@ const DEFAULT_REQUEST_OPTION: CJ.HTTP_OPTION = {
   mode: 'cors',
   baseURL: '',
   headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
+    'Content-Type': 'application/json'
   },
   body: {},
   credentials: 'same-origin',
@@ -105,7 +105,7 @@ export class HTTP {
           body: data !== null ? JSON.stringify(data) : undefined
         }
 
-        if (config.method) {
+        if (config && config.method) {
           opt.method = config.method.toUpperCase()
         }
 

@@ -1,6 +1,6 @@
 /**
  * name: @chengjs/utils
- * version: v0.2.2
+ * version: v0.2.3
  * author: Chengzi <ttghost@126.com>
  */
 
@@ -155,7 +155,7 @@ const DEFAULT_REQUEST_OPTION = {
     mode: 'cors',
     baseURL: '',
     headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
     },
     body: {},
     credentials: 'same-origin',
@@ -210,7 +210,7 @@ class HTTP {
                     method: urlMethod,
                     body: data !== null ? JSON.stringify(data) : undefined
                 };
-                if (config.method) {
+                if (config && config.method) {
                     opt.method = config.method.toUpperCase();
                 }
                 if (['GET', 'HEAD'].indexOf(opt.method) > -1)
