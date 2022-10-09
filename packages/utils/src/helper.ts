@@ -38,3 +38,20 @@ export const deepClone = (val: unknown) => {
   }
   return clone(val)
 }
+
+export const random = (len = 8) => {
+  const num = '0123456789'
+  const letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+  const char = letter + num
+  const first = letter.charAt(Math.floor(Math.random() * letter.length))
+  let last = ''
+
+  if (len <= 0) len = 8
+
+  if (len > 1) {
+    for (let i = 0; i < len - 1; i++) {
+      last += char.charAt(Math.floor(Math.random() * char.length))
+    }
+  }
+  return first + last
+}

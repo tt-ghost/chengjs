@@ -83,6 +83,21 @@ const deepClone = (val) => {
     };
     return clone(val);
 };
+const random = (len = 8) => {
+    const num = '0123456789';
+    const letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const char = letter + num;
+    const first = letter.charAt(Math.floor(Math.random() * letter.length));
+    let last = '';
+    if (len <= 0)
+        len = 8;
+    if (len > 1) {
+        for (let i = 0; i < len - 1; i++) {
+            last += char.charAt(Math.floor(Math.random() * char.length));
+        }
+    }
+    return first + last;
+};
 
 const parseURL = (url) => {
     const [start, end = ''] = url.split('?');
@@ -232,4 +247,4 @@ class HTTP {
     }
 }
 
-export { HTTP, REG_URI_DOMAIN, REG_URI_PATH, REG_URI_PORT, REG_URI_PROTOCOL, copy, deepClone, is, isArray, isBaseType, isBigInt, isBoolean, isDate, isDom, isFunction, isNull, isNumber, isObject, isPromise, isRegExp, isString, isSymbol, isUndefined, mapListToObject, parseURL };
+export { HTTP, REG_URI_DOMAIN, REG_URI_PATH, REG_URI_PORT, REG_URI_PROTOCOL, copy, deepClone, is, isArray, isBaseType, isBigInt, isBoolean, isDate, isDom, isFunction, isNull, isNumber, isObject, isPromise, isRegExp, isString, isSymbol, isUndefined, mapListToObject, parseURL, random };

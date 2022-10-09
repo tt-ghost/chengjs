@@ -49,4 +49,20 @@ namespace CJ {
     integrity?: string
     signal?: string
   }
+
+  export interface StoreConfig {
+    // 命名空间，不指定会默认生成8位随机字符串
+    ns?: string
+    // 存储类型
+    type?: 'local' | 'session'
+    // 可被JSON序列化的数据
+    data: any
+  }
+
+  export interface StoreItemConfig {
+    // 过期时间，优先级高于 duration，不传默认当前时间后100年过期
+    expire?: number
+    // 从当前开始多久后会过期
+    duration?: number
+  }
 }
