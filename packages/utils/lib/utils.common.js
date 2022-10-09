@@ -251,11 +251,146 @@ class HTTP {
     }
 }
 
+const parse = jsonString => JSON.parse(jsonString);
+const stringify = json => JSON.stringify(json);
+class Store {
+    constructor(config) {
+        const { type, ns, data } = config || {};
+        this.ns = ns || random();
+        this.type = type || 'local';
+        this.setAll(data);
+    }
+    set(key, value, opt) {
+        let { expire } = opt || {};
+        const { duration } = opt || {};
+        const now = Date.now();
+        const ONE_HUNDRED_YEARS = 100 * 365 * 24 * 60 * 60 * 1000;
+        const DEFAULT_EXPIRE = now + ONE_HUNDRED_YEARS;
+        if (isNumber(expire)) ;
+        else if (isNumber(duration)) {
+            expire = now + duration;
+        }
+        else {
+            expire = DEFAULT_EXPIRE;
+        }
+        if (expire <= now) {
+            return this.remove(key);
+        }
+        const data = {
+            expire,
+            value
+        };
+        switch (this.type) {
+            case 'local':
+            case 'session':
+                window[this.type + 'Storage'].setItem(`${this.ns}_${key}`, stringify(data));
+                break;
+            case 'cookie':
+                document.cookie = `${key}:${value}`;
+                break;
+        }
+    }
+    setAll(data) {
+        if (!isObject(data))
+            return;
+        for (const i in data) {
+            this.set(i, data[i]);
+        }
+    }
+    get(key, withMeta = false) {
+        let result = null;
+        switch (this.type) {
+            case 'local':
+            case 'session': {
+                const data = window[this.type + 'Storage'].getItem(`${this.ns}_${key}`);
+                if (data)
+                    break;
+                const { expire, value } = parse(data) || {};
+                if (!isNumber(expire))
+                    break;
+                if (expire <= Date.now()) {
+                    this.remove(key);
+                }
+                else {
+                    if (withMeta) {
+                        result = parse(data);
+                    }
+                    else {
+                        result = value;
+                    }
+                }
+                break;
+            }
+        }
+        return result;
+    }
+    getAll(withMeta = false) {
+        const result = {};
+        switch (this.type) {
+            case 'local':
+            case 'session': {
+                const len = window[this.type + 'Storage'].length;
+                const keys = [];
+                for (let i = 0; i < len; i++) {
+                    const fullkey = window[this.type + 'Storage'].key(i);
+                    if (fullkey.startsWith(this.ns + '_')) {
+                        const key = fullkey.replace(new RegExp('^' + this.ns + '_'), '');
+                        key && keys.push(key);
+                    }
+                }
+                keys.forEach(key => {
+                    const value = this.get(key, withMeta);
+                    if (value !== null)
+                        result[key] = this.get(key, withMeta);
+                });
+                break;
+            }
+        }
+        return result;
+    }
+    remove(key) {
+        switch (this.type) {
+            case 'local':
+            case 'session':
+                window[this.type + 'Storage'].removeItem(`${this.ns}_${key}`);
+                break;
+        }
+    }
+    removeAll() {
+        switch (this.type) {
+            case 'local':
+            case 'session': {
+                const len = window[this.type + 'Storage'].length;
+                const nsKeys = [];
+                for (let i = 0; i < len; i++) {
+                    const fullkey = window[this.type + 'Storage'].key(i);
+                    if (fullkey.startsWith(this.ns + '_')) {
+                        nsKeys.push(fullkey);
+                    }
+                }
+                nsKeys.forEach(key => {
+                    window[this.type + 'Storage'].removeItem(key);
+                });
+                break;
+            }
+        }
+    }
+    clear() {
+        switch (this.type) {
+            case 'local':
+            case 'session':
+                window[this.type + 'Storage'].clear();
+                break;
+        }
+    }
+}
+
 exports.HTTP = HTTP;
 exports.REG_URI_DOMAIN = REG_URI_DOMAIN;
 exports.REG_URI_PATH = REG_URI_PATH;
 exports.REG_URI_PORT = REG_URI_PORT;
 exports.REG_URI_PROTOCOL = REG_URI_PROTOCOL;
+exports.Store = Store;
 exports.copy = copy;
 exports.deepClone = deepClone;
 exports.is = is;
