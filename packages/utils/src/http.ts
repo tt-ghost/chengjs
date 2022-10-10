@@ -58,7 +58,7 @@ const mergeConfig = (config1, config2) => {
 export class HTTP {
   public config: any
 
-  constructor(opt) {
+  constructor(opt?: CJ.HTTP_OPTION) {
     this.config = mergeConfig(DEFAULT_REQUEST_OPTION, opt)
   }
   async fetch(url: string, opt?: CJ.HTTP_OPTION) {
@@ -112,16 +112,18 @@ export class HTTP {
         if (['GET', 'HEAD'].indexOf(opt.method) > -1) delete opt.body
 
         return this.fetch(this.resolve(url), opt).then(res => {
-
           let isJson = false
           res.headers.forEach((v, k) => {
-            if(k.toLowerCase() === 'content-type' && v.indexOf('application/json') > -1){
+            if (
+              k.toLowerCase() === 'content-type' &&
+              v.indexOf('application/json') > -1
+            ) {
               isJson = true
             }
-          });
-          if (isJson) return res.json();
+          })
+          if (isJson) return res.json()
 
-          return res;
+          return res
         })
       }
     }

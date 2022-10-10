@@ -6,7 +6,7 @@ const stringify = json => JSON.stringify(json)
 
 export class Store {
   // 储存类型
-  type: 'local' | 'session' | 'cookie'
+  type: 'local' | 'session'
   // 命名空间
   ns: string
 
@@ -18,9 +18,9 @@ export class Store {
     this.setAll(data)
   }
 
-  set(key: string, value: any, opt?: CJ.StoreItemConfig): void {
-    let { expire } = opt || {}
-    const { duration } = opt || {}
+  set(key: string, value: any, config?: CJ.StoreItemConfig): void {
+    let { expire } = config || {}
+    const { duration } = config || {}
     const now = Date.now()
     // 默认过期时间为当前时间后100年
     const ONE_HUNDRED_YEARS = 100 * 365 * 24 * 60 * 60 * 1000
@@ -37,10 +37,7 @@ export class Store {
     if (expire <= now) {
       return this.remove(key)
     }
-    const data = {
-      expire,
-      value
-    }
+    const data = { expire, value }
     switch (this.type) {
       case 'local':
       case 'session':
@@ -48,9 +45,6 @@ export class Store {
           `${this.ns}_${key}`,
           stringify(data)
         )
-        break
-      case 'cookie':
-        document.cookie = `${key}:${value}`
         break
       default:
         break
@@ -102,21 +96,18 @@ export class Store {
         const keys = []
         for (let i = 0; i < len; i++) {
           const fullkey = window[this.type + 'Storage'].key(i)
-          if (fullkey.startsWith(this.ns + '_')) {
-            const key = fullkey.replace(new RegExp('^' + this.ns + '_'), '')
+          const prefix = this.ns + '_'
+          if (fullkey.startsWith(prefix)) {
+            const key = fullkey.replace(new RegExp('^' + prefix), '')
             key && keys.push(key)
           }
         }
         keys.forEach(key => {
           const value = this.get(key, withMeta)
           if (value !== null) result[key] = this.get(key, withMeta)
-          // result.push(this.get(key, withMeta));
         })
         break
       }
-      case 'cookie':
-        // document.cookie = `${key}`;
-        break
       default:
         break
     }
@@ -128,9 +119,6 @@ export class Store {
       case 'local':
       case 'session':
         window[this.type + 'Storage'].removeItem(`${this.ns}_${key}`)
-        break
-      case 'cookie':
-        // document.cookie = `${key}`;
         break
       default:
         break
@@ -146,18 +134,13 @@ export class Store {
         const nsKeys = []
         for (let i = 0; i < len; i++) {
           const fullkey = window[this.type + 'Storage'].key(i)
-          if (fullkey.startsWith(this.ns + '_')) {
-            nsKeys.push(fullkey)
-          }
+          if (fullkey.startsWith(this.ns + '_')) nsKeys.push(fullkey)
         }
         nsKeys.forEach(key => {
           window[this.type + 'Storage'].removeItem(key)
         })
         break
       }
-      case 'cookie':
-        // document.cookie = `${key}`;
-        break
       default:
         break
     }
@@ -168,9 +151,6 @@ export class Store {
       case 'local':
       case 'session':
         window[this.type + 'Storage'].clear()
-        break
-      case 'cookie':
-        // document.cookie = `${key}`;
         break
       default:
         break
