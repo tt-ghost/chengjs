@@ -1,0 +1,22 @@
+{
+  "includes": ["src/**/*.ts", "tests", "types/main.d.ts"],
+  "exclude": ["node_modules"],
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "declaration": false,
+    "declarationMap": false,
+    // "declarationDir": "./types",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "removeComments": true,
+    "sourceMap": false,
+    "baseUrl": "./src",
+    "outDir": "./lib",
+    "downlevelIteration": true,
+    "typeRoots": ["node_modules/@types", "types"],
+    "types": ["node", "jest"]
+  }
+}
