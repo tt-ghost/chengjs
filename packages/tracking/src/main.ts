@@ -1,8 +1,4 @@
-import { version } from '../package.json'
+import Tracking from './Tracking'
+import Designer from './Designer'
 
-export default class Tracking {
-  public version: string
-  constructor() {
-    this.version = version
-  }
-}
+export { Tracking, Designer }

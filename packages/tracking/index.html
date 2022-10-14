@@ -8,10 +8,22 @@
   </head>
   <body>
     @chengjs/tracking 打开浏览器 devTools 调试，访问 tracking
-    <script type="module">
-      import Tracking from './lib/tracking.esm.js'
+    <p id="pp">id元素测试</p>
+    <a class="link"> 链接测试</a>
+    <h3>无class 标签测试</h3>
+    <div>
+      外部文本
+      <div>内部嵌套div1</div>
 
-      window.Tracking = Tracking
+      <div>内部嵌套div2</div>
+    </div>
+
+    <script type="module">
+      import { Designer } from './lib/tracking.esm.js'
+
+      window.Designer = Designer
+
+      const tracking = new Designer()
     </script>
   </body>
 </html>

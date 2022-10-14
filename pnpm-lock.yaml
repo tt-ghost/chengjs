@@ -164,6 +164,7 @@ importers:
   packages/tracking:
     specifiers:
       '@chengjs/eslint-plugin': ^0.3.2
+      '@chengjs/utils': ^0.2.3
       '@rollup/plugin-commonjs': ^22.0.2
       '@rollup/plugin-json': ^4.1.0
       '@rollup/plugin-node-resolve': ^14.1.0
@@ -178,6 +179,8 @@ importers:
       typedoc: ^0.23.15
       typedoc-plugin-markdown: ^3.13.6
       typescript: ^4.8.2
+    dependencies:
+      '@chengjs/utils': 0.2.3
     devDependencies:
       '@chengjs/eslint-plugin': link:../eslint-plugin
       '@rollup/plugin-commonjs': 22.0.2_rollup@2.79.1
@@ -588,6 +591,10 @@ packages:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
       - supports-color
+    dev: false
+
+  /@chengjs/utils/0.2.3:
+    resolution: {integrity: sha512-TxhUZuy+9NvQ7GG5qCMK7IM9rnsKA2YlYnmfBIFHU9l0GZzB3H7Gzn8g32RzF2m18VCesuyERwbb8yLc1aj91w==}
     dev: false
 
   /@cspotcode/source-map-support/0.8.1:
