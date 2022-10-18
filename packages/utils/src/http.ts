@@ -60,7 +60,7 @@ const mergeConfig = (config1, config2) => {
  */
 
 export class HTTP {
-  public config: any
+  public config: CJ.HTTP_OPTION
 
   constructor(opt?: CJ.HTTP_OPTION) {
     this.config = mergeConfig(DEFAULT_REQUEST_OPTION, opt)
