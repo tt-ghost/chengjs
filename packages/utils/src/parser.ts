@@ -2,6 +2,8 @@
  * 解析URL
  * @param url url 地址
  * @returns object
+ * 
+ * 详情访问：https://www.yuque.com/chengzi-qxeon/chengjs/xkoirz#hlG0j
  */
 export const parseURL = (url: string): CJ.URL => {
   const [start, end = ''] = url.split('?')
@@ -31,6 +33,7 @@ export const parseURL = (url: string): CJ.URL => {
     }
     return result
   }, {})
+  
   const domainRegStr = '((?:[a-z\\d][a-z\\d-]*\\.)+[a-z\\d]+)'
   const portRegStr = '(?::(\\d+))?'
   const pathRegStr = '((?:\\/[a-z-\\d]+)*)'

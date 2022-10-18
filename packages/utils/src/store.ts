@@ -4,12 +4,23 @@ import { random } from './helper'
 const parse = jsonString => JSON.parse(jsonString)
 const stringify = json => JSON.stringify(json)
 
+/**
+ * 创建本地存储，支持空间隔离，获取值即存储时类型
+ */
+
 export class Store {
   // 储存类型
   type: 'local' | 'session'
   // 命名空间
   ns: string
 
+  /**
+   * 
+   * @param config 实例化存储的配置信息
+   * @param config.ns 明明空间，默认会随机生成，也可指定
+   * @param config.type 浏览器存储类型，默认 'local'，可选：'local' | 'session'
+   * @param config.data 实例化时直接存储的数据，支持常见数据类型，不支持循环引用
+   */
   constructor(config?: CJ.StoreConfig) {
     const { type, ns, data } = config || {}
 

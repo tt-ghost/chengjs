@@ -44,12 +44,16 @@ const mergeConfig = (config1, config2) => {
  *  }
 
  *  const api = http.create(apis)
+ *
  *  // 默认发送 GET 请求 /api/user/info
  *  const res = await api.getUser()
+ * 
  *  // 发送 PUT 请求 /api/user/info
  *  const res = await api.updateUser({ name: 'chengjs' })
+ * 
  *  // 发送 POST 请求，第二个参数选项的method 比 url路径中声明的method优先级高
  *  const res = await api.updateUser({ name: 'chengjs' }, { method: 'POST' })
+ * 
  *  // 忽略 baseURL，发送 POST 请求到 http://test.com/user/add
  *  const res = await api.sendUser({ name: 'chengjs' })
  *

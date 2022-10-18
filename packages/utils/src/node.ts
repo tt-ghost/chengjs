@@ -6,8 +6,8 @@ export function getIP() {
   for (const key in interfaces) {
     const faces = interfaces[key]
     const result = faces.find(
-      face =>
-        face.family === 'IPv4' && face.address !== '127.0.0.1' && !face.internal
+      item =>
+        item.family === 'IPv4' && item.address !== '127.0.0.1' && !item.internal
     )
     if (result) return result.address
   }
