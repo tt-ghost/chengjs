@@ -3,6 +3,7 @@
  * @param text 待复制的文本
  * @returns void
  * @examples
+ * 
  * ```js
  * copy('copy test')
  * ```

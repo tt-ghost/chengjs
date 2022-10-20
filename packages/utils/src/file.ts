@@ -1,14 +1,12 @@
-interface FileSelectOption {
-  multiple?: boolean
-  type?: string
-}
-
+/**
+ * 通过js操作浏览器文件
+ */
 export class FileSelect {
   public multiple: boolean
   public type: string
   public el: HTMLInputElement
 
-  constructor(opt: FileSelectOption) {
+  constructor(opt: CJ.FileSelectOption) {
     const { multiple, type } = opt || {}
     this.multiple = multiple
     this.type = type
@@ -37,7 +35,7 @@ export class FileSelect {
     const file = document.createElement('input')
     const body = document.body
     file.setAttribute('type', 'file')
-    file.setAttribute('style', 'display:none')
+    file.setAttribute('style', 'display: none')
     if (this.multiple) {
       file.setAttribute('multiple', 'true')
     }

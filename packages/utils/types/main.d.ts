@@ -65,4 +65,9 @@ namespace CJ {
     // 从当前开始多久后会过期
     duration?: number
   }
+
+  export interface FileSelectOption {
+    multiple?: boolean
+    type?: string
+  }
 }

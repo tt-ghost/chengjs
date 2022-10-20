@@ -3,12 +3,14 @@
  */
 export function getIP() {
   const interfaces = require('os').networkInterfaces()
+
   for (const key in interfaces) {
     const faces = interfaces[key]
     const result = faces.find(
-      item =>
-        item.family === 'IPv4' && item.address !== '127.0.0.1' && !item.internal
+      ({ family,address, internal }) =>
+        family === 'IPv4' && address !== '127.0.0.1' && !internal
     )
     if (result) return result.address
+    return ''
   }
 }
