@@ -1,7 +1,7 @@
 {
   "name": "@chengjs/utils",
-  "version": "0.3.3",
-  "main": "./lib/utils.min.js",
+  "version": "0.3.4",
+  "main": "./lib/utils.umd.js",
   "module": "./lib/utils.esm.js",
   "types": "types/main.d.ts",
   "author": "Chengzi <ttghost@126.com>",
