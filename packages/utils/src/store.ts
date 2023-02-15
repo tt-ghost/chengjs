@@ -75,7 +75,7 @@ export class Store {
       case 'local':
       case 'session': {
         const data = window[this.type + 'Storage'].getItem(`${this.ns}_${key}`)
-        if (data) break
+        if (!data) break
 
         const { expire, value } = parse(data) || {}
         if (!isNumber(expire)) break

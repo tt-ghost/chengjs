@@ -1,6 +1,6 @@
 {
   "name": "@chengjs/utils",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "main": "./lib/utils.umd.js",
   "module": "./lib/utils.esm.js",
   "types": "types/main.d.ts",
