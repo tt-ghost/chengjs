@@ -5,9 +5,9 @@ import { isFunction, isSymbol, isBaseType, isArray, isObject } from './type'
  * @param val 待深度赋值的数据
  * @returns 新复制的数据
  * @example
- * 
+ *
  * 详情访问：https://www.yuque.com/chengzi-qxeon/chengjs/xkoirz#MPKu9
- * 
+ *
  * const sym = Symbol('chengjs')
  * const data = {
  *   name: 'Hello Chengjs Utils',
@@ -24,7 +24,6 @@ import { isFunction, isSymbol, isBaseType, isArray, isObject } from './type'
  */
 export const deepClone = (val: unknown) => {
   const map = new Map()
-  // eslint-disable-next-line
   const clone = (val: any) => {
     if (isFunction(val)) return undefined
     if (isSymbol(val)) return Symbol(val.description)
@@ -66,7 +65,7 @@ export const deepClone = (val: unknown) => {
  * @param len 随机字符串长度
  * @returns 指定长度的随机字符串
  */
-export const random = (len = 8) => {
+export const random = (len = 8): string => {
   const num = '0123456789'
   const letter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
   const char = letter + num
