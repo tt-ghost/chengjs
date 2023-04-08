@@ -1,0 +1,100 @@
+:root {
+  /* color */
+  --cj-color: #333;
+  --cj-bg-color: transparent;
+  --cj-primary-color: #056de8;
+  --cj-error-color: #f33f3c;
+  --cj-placeholder-color: rgba(0, 0, 0, 0.01);
+
+  /* font */
+  --cj-font-size: 14px;
+  --cj-line-height: 1.66;
+  --cj-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+}
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: inset006pxrgba(0, 0, 0, 0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255, 0, 0, 0.4);
+}
+/* placeholder */
+::-webkit-input-placeholder,
+:-ms-input-placeholder,
+::placeholder {
+  color: rgba(0, 0, 0, 0.01);
+}
+
+html,
+body {
+  height: 100%;
+}
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(23, 23, 23, 0);
+}
+body {
+  font-size: var(--cj-font-size);
+  color: var(--cj-color);
+  background-color: var(--cj-bg-color);
+  font-family: var(--cj-font-family);
+  line-height: var(--cj-line-height);
+}
+input,
+textarea,
+select,
+button {
+  font: var(--cj-font-size) Verdana, Helvetica, Arial, sans-serif;
+  border: none;
+  color: var(--cj-color);
+}
+button:focus {
+  outline: 0;
+}
+input[type="text"],
+input[type="password"],
+input[type="number"],
+textarea {
+  -webkit-appearance: none;
+}
+
+a {
+  text-decoration: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  -webkit-text-decoration-skip: objects;
+}
+a,
+a:visited,
+a:active,
+a:focus {
+  color: var(--cj-color);
+}
+a:hover {
+  color: darken(var(--cj-primary-color), 10%);
+}
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}

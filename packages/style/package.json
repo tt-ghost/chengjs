@@ -1,0 +1,23 @@
+{
+  "name": "@chengjs/style",
+  "version": "0.1.0",
+  "author": "Chengzi <ttghost@126.com>",
+  "description": "chengjs style",
+  "license": "MIT",
+  "keywords": [
+    "css lib",
+    "chengjs",
+    "no dependence"
+  ],
+  "repository": {
+    "url": "tt-ghost/chengjs",
+    "directory": "packages/style"
+  },
+  "homepage": "https://github.com/tt-ghost/chengjs/blob/master/packages/style/README.md",
+  "files": [
+    "reset.css",
+    "layout.css",
+    "README.md"
+  ],
+  "dependencies": {}
+}
