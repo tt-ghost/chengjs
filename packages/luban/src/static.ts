@@ -46,6 +46,6 @@ export function useCreate(ctx?: IContext) {
  * 主应用mounte生命周期回调hook，主应用已挂在dom
  * @param ctx IContext
  */
-export function useMounte(ctx?: IContext) {
+export function useMount(ctx?: IContext) {
   console.log('mounte: ', ctx)
 }

@@ -1,6 +1,6 @@
 // https://developer.mozilla.org/zh-CN/docs/Web/API/fetch
 import Context from './Context'
-import { install, useContext, useCreate, useMounte } from './static'
+import { install, useContext, useCreate, useMount } from './static'
 
 type IContext = Context
 /**
@@ -14,7 +14,7 @@ export default class Luban {
   public static install: (app: any, config?: any) => any
   public static useContext?: () => IContext
   public static useCreate?: (ctx: IContext) => any
-  public static useMounte?: (ctx: IContext) => any
+  public static useMount?: (ctx: IContext) => any
 
   constructor(conf?: CJ.ILuban) {
     this.config = conf
@@ -28,4 +28,4 @@ Luban.useContext = useContext
 
 Luban.useCreate = useCreate
 
-Luban.useMounte = useMounte
+Luban.useMount = useMount
