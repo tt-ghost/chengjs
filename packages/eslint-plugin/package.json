@@ -1,7 +1,7 @@
 {
   "name": "@chengjs/eslint-plugin",
   "private": false,
-  "version": "0.4.0",
+  "version": "0.4.1",
   "main": "./lib/index.js",
   "author": "Chengzi <ttghost@126.com>",
   "description": "chengjs eslint plugin eslint规范",
