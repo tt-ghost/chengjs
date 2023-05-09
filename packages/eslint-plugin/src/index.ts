@@ -3,7 +3,7 @@ import vue from './configs/vue'
 import react from './configs/react'
 import reactAll from './configs/react-all'
 import recommended from './configs/recommended'
-import vue3Recommended from './configs/vue3-recommended'
+import vue3 from './configs/vue3'
 
 export = {
   env: {
@@ -24,7 +24,7 @@ export = {
   configs: {
     typescript,
     vue,
-    'vue3-recommended': vue3Recommended,
+    vue3: vue3,
     react,
     'react-all': reactAll,
     recommended

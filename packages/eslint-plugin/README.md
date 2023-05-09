@@ -20,3 +20,20 @@ module.export = {
   extends: ['plugin:@chengjs/typescript']
 }
 ```
+
+- 说明
+
+规范支持
+
+```js
+// typescript
+extends: ['plugin:@chengjs/typescript']
+// vue2
+extends: ['plugin:@chengjs/vue']
+// vue3
+extends: ['plugin:@chengjs/vue3']
+// react
+extends: ['plugin:@chengjs/react']
+// react 区别于继承与 plugin:react/all
+extends: ['plugin:@chengjs/react-all']
+```
