@@ -16,17 +16,18 @@ const DEFAULT_REQUEST_OPTION: CJ.HTTP_OPTION = {
   referrer: 'client'
 }
 
+const NO_BODY_METHODS = ['GET', 'DELETE', 'OPTIONS', 'HEAD', 'CONNECT', 'TRACE']
+const isNoBodyMethod = method => NO_BODY_METHODS.indexOf(method) > -1
+
 const mergeConfig = (config1, config2) => {
   const { headers: h1, method: m1, ...others1 } = config1 || {}
   const { headers: h2, method: m2, ...others2 } = config2 || {}
-  return Object.assign(
-    {},
-    { ...others1, ...others2 },
-    {
-      method: (m2 || m1 || '').toUpperCase(),
-      headers: Object.assign({}, h1 || {}, h2 || {})
-    }
-  )
+  return {
+    ...others1,
+    ...others2,
+    method: (m2 || m1 || '').toUpperCase(),
+    headers: Object.assign({}, h1 || {}, h2 || {})
+  }
 }
 
 /**
@@ -82,14 +83,35 @@ export class HTTP {
     return result
   }
 
-  resolve(url = '') {
-    if (new RegExp(REG_URI_DOMAIN, 'i').test(url)) {
-      return url
-    } else {
-      return (
-        this.config.baseURL.replace(/\/$/, '') + '/' + url.replace(/^\//, '')
-      )
+  resolveUrl(url = '', opt) {
+    let queries = {}
+    const { config, method, data } = opt || {}
+    if (isNoBodyMethod(method)) {
+      queries = data || {}
     }
+    const { query } = config || {}
+    queries = {...(query || {}), ...queries }
+
+    if (!(new RegExp(REG_URI_DOMAIN, 'i').test(url))) {
+      url = this.config.baseURL.replace(/\/$/, '') + '/' + url.replace(/^\//, '')
+    }
+    if (typeof queries === 'object') {
+      const queryString = Object.keys(queries).map(key => {
+        if (queries[key] == null) return `${key}=`
+        return `${key}=${String(queries[key])}`
+      }).join('&')
+      const idx = url.indexOf('?')
+      if (idx > -1) {
+        if (idx === url.length -1) {
+          url += `${queryString}`
+        } else {
+          url += `&${queryString}`
+        }
+      } else {
+        url += `?${queryString}`
+      }
+    }
+    return url
   }
 
   create(apis: { [key: string]: string }): {
@@ -113,9 +135,9 @@ export class HTTP {
           opt.method = config.method.toUpperCase()
         }
 
-        if (['GET', 'HEAD'].indexOf(opt.method) > -1) delete opt.body
-
-        return this.fetch(this.resolve(url), opt).then(res => {
+        if (isNoBodyMethod(opt.method)) delete opt.body
+        const fullUrl = this.resolveUrl(url, { config, method: opt.method, data })
+        return this.fetch(fullUrl, opt).then(res => {
           let isJson = false
           res.headers.forEach((v, k) => {
             if (
