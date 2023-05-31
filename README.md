@@ -4,17 +4,17 @@
 
 ## 核心模块
 
-- `eslint-plugin` Eslint 规范
+- [eslint-plugin](https://github.com/tt-ghost/chengjs/tree/master/packages/eslint-plugin) Eslint 规范 
   - `vue` 针对vue2项目
   - `vue3` 针对vue3项目
   - `react` react项目推荐
   - `react-all` hooks 及 class 组件支持
   - `typescript` ts项目推荐
-- `standard` 常见项目规范及配置文件
-- `utils` 常用工具库
+- [standard](https://github.com/tt-ghost/chengjs/tree/master/packages/standard) 常见项目规范及配置文件
+- [utils](https://github.com/tt-ghost/chengjs/tree/master/packages/utils) 常用工具库
   -  `HTTP` 基于 `window.fetch` 封装
   -  `store` web 本地存储封装
   -  `type` 类型检查相关
   -  `helper` 常见工具函数，深度复制、随机字符串等
   -  `format` 常见数据格式转换
-- `style` 常见样式定义，原子样式、reset重置、布局等
+- [style](https://github.com/tt-ghost/chengjs/tree/master/packages/style) 常见样式定义，原子样式、reset重置、布局等
