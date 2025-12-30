@@ -15,6 +15,22 @@
     "release": "npm run build && npm run build:doc",
     "test:unit": "jest"
   },
+  "keywords": [
+    "browser",
+    "chengjs",
+    "helper",
+    "no dependence"
+  ],
+  "repository": {
+    "url": "tt-ghost/chengjs",
+    "directory": "packages/browser"
+  },
+  "homepage": "https://github.com/tt-ghost/chengjs/blob/master/packages/browser/README.md",
+  "files": [
+    "lib",
+    "types",
+    "README.md"
+  ],
   "devDependencies": {
     "@chengjs/eslint-plugin": "^0.4.1",
     "@rollup/plugin-commonjs": "^29.0.0",
