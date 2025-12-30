@@ -14,8 +14,6 @@ npm i @chengjs/constants
 
 ```js
 import { contryCodes } from '@chengjs/constants'
-// 或以下方式引用
-// import contryCodes from '@chengjs/constants/lib/contry-codes'
 
 ```
 
