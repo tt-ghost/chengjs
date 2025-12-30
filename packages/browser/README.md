@@ -18,5 +18,5 @@ import { userAgentParser } from '@chengjs/browser'
 const cloned = userAgentParser()
 ```
 
-`<script>` 方式引入，可通过 `window.userAgentParser` 访问
+`<script>` 方式引入，可通过 `window.cjsBrowser` 访问
 
