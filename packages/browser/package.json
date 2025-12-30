@@ -1,5 +1,6 @@
 {
   "name": "@chengjs/browser",
+  "type": "module",
   "main": "lib/main.min.js",
   "module": "lib/main.esm.js",
   "types": "types/main.d.ts",
